@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Contactar</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: rgb(221, 224, 221);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <%- include('navbar.ejs'); %>
+        </header>
+
+        <h3 class="text-center mt-3">Envie-nos um email</h3>
+
+        <!-- Lado direito do ecrã -->
+        <div class="row justify-content-between">
+            <div class="col-md-8">
+                <div class="shadow-lg p-3 mt-3 bg-white rounded">
+                    <form action="" method="post">
+
+                        <!-- nome do membro da UMa-->
+                        <div class="form-group">
+                            <label for="nomeMembroUMa">Nome</label>
+                            <input type="text" class="form-control" id="nomeMembroUMa" placeholder="Nome">
+                        </div>
+
+                        <!-- email do membro da UMa -->
+                        <div class="form-group">
+                            <label for="emailMembroUMa">Email</label>
+                            <input type="email" class="form-control" id="emailMembroUMa" placeholder="nome@email.com">
+                        </div>
+
+                        <!-- assunto do email a enviar -->
+                        <div class="form-group">
+                            <label for="assuntoEmail">Assunto</label>
+                            <input type="text" class="form-control" id="assuntoEmail" placeholder="Assunto">
+                        </div>
+
+                        <!-- mensagem a enviar -->
+                        <div class="form-group">
+                            <label for="mensagemEmail">Mensagem</label>
+                            <textarea class="form-control" id="mensagemEmail" rows="4"></textarea>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-dark">Enviar</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Lado esquerdo do ecrã -->
+            <div class="col-md-4">
+                <div class="shadow-lg p-3 mt-3  bg-white rounded">
+                    <img src="/img/bus2.jpg" class="img-thumbnail">
+                    <p class="text-center">Caminho da Penteada, 9020-105 Funchal</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
