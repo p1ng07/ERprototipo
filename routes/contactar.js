@@ -10,7 +10,7 @@ var pass = "PHPWEB123"
 
 /* GET contacts page. */
 router.get("/", function (req, res, next) {
-    res.render("contactar")
+    res.render("contactar", {sended: false})
 })
 
 const transporter = nodemailer.createTransport({
@@ -37,8 +37,7 @@ router.post("/", function (req, res, next) {
         if (error) {
             return res.status(500).send(error.toString());
         }
-        //TODO: Fazer o tratamento de quando o email é enviado
-        res.status(200).send('E-mail enviado com sucesso!');
+        res.render("contactar", { sended: true })
     })
 
 })
