@@ -4,13 +4,12 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const session = require("express-session");
+const bodyParser = require("body-parser");
 
 const sessionMiddleware = session({
-  secret:
-    Math.random().toString(36).substring(2, 15) +
-    Math.random().toString(36).substring(2, 15),
-  resave: false,
-  saveUninitialized: false,
+  secret: "secret",
+  resave: true,
+  saveUninitialized: true,
 });
 
 var indexRouter = require("./routes/index");
@@ -18,11 +17,12 @@ var usersRouter = require("./routes/users");
 var loginRouter = require("./routes/login");
 
 var app = express();
-
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(sessionMiddleware);
 app.use(logger("dev"));
 app.use(express.json());
