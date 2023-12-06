@@ -23,46 +23,46 @@
 
         <h3 class="text-center mt-3">Envie-nos um email</h3>
 
-        <!-- Lado direito do ecrã -->
+        <!-- Lado esquerdo do ecrã -->
         <div class="row justify-content-between">
             <div class="col-md-8">
                 <div class="shadow-lg p-3 mt-3 bg-white rounded">
-                    <form action="" method="post">
+                    <form action="/contactar" method="post">
 
                         <!-- nome do membro da UMa-->
                         <div class="form-group">
-                            <label for="nomeMembroUMa">Nome</label>
-                            <input type="text" class="form-control" id="nomeMembroUMa" placeholder="Nome">
+                            <label for="nomeMembroUMa">Nome <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" name="nomeMembroUMa" id="nomeMembroUMa" placeholder="Nome" required>
                         </div>
 
                         <!-- email do membro da UMa -->
                         <div class="form-group">
-                            <label for="emailMembroUMa">Email</label>
-                            <input type="email" class="form-control" id="emailMembroUMa" placeholder="nome@email.com">
+                            <label for="emailMembroUMa">Email <span style="color: red;">*</span></label>
+                            <input type="email" class="form-control" name="emailMembroUMa" id="emailMembroUMa" placeholder="nome@email.com" required>
                         </div>
 
                         <!-- assunto do email a enviar -->
                         <div class="form-group">
-                            <label for="assuntoEmail">Assunto</label>
-                            <input type="text" class="form-control" id="assuntoEmail" placeholder="Assunto">
+                            <label for="assuntoEmail">Assunto <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" name="assuntoEmail" id="assuntoEmail" placeholder="Assunto" required>
                         </div>
 
                         <!-- mensagem a enviar -->
                         <div class="form-group">
-                            <label for="mensagemEmail">Mensagem</label>
-                            <textarea class="form-control" id="mensagemEmail" rows="4"></textarea>
+                            <label for="mensagemEmail">Mensagem <span style="color: red;">*</span></label>
+                            <textarea class="form-control" name="mensagemEmail" id="mensagemEmail" rows="4" required></textarea>
                         </div>
 
-                        <button type="button" class="btn btn-outline-dark">Enviar</button>
+                        <button type="submit" class="btn btn-outline-dark">Enviar</button>
                     </form>
                 </div>
             </div>
 
-            <!-- Lado esquerdo do ecrã -->
+            <!-- Lado direito do ecrã -->
             <div class="col-md-4">
                 <div class="shadow-lg p-3 mt-3  bg-white rounded">
                     <img src="/img/bus2.jpg" class="img-thumbnail">
-                    <p class="text-center">Caminho da Penteada, 9020-105 Funchal</p>
+                    <p class="text-center mt-3">Caminho da Penteada, 9020-105 Funchal</p>
                 </div>
             </div>
         </div>
