@@ -22,25 +22,51 @@
     <div class="container">
       <div class="shadow-lg p-3 mt-3 bg-white rounded">
         <h3 class="text-center">Iniciar sessão</h3>
-        <form method="post">
+        <form action="./" method="post">
           <!-- email -->
           <div class="form-group">
-            <label for="emailMembroUMa">Email</label>
+            <% if (error_email == true) { %>
+            <!-- Errors for username -->
+            <div>
+              <label for="form__email">Email</label>
+            </div>
+            <div>
+              <label for="form__email" class="text-danger">
+                O e-mail inserido não existe no sistema.
+              </label>
+            </div>
+            <% } else { %>
+            <label for="form__email">Email</label>
+            <% } %>
             <input
               type="email"
               class="form-control"
-              id="emailMembroUMa"
+              id="form__email"
+              name="form__email"
               placeholder="nome@email.com"
             />
           </div>
 
           <!-- Criação da password -->
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
+            <% if (error_pass == true) { %>
+            <!-- Error for password -->
+            <div>
+              <label for="form__password">Password</label>
+            </div>
+            <div>
+              <label for="form__password" class="text-danger">
+                A password inserida não pertence ao e-mail inserido.
+              </label>
+            </div>
+            <% } else { %>
+            <label for="form__password">Password</label>
+            <% } %>
             <input
               type="password"
               class="form-control"
-              id="exampleInputPassword1"
+              id="form__password"
+              name="form__password"
               placeholder="Password"
             />
           </div>
