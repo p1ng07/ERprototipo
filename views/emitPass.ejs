@@ -4,9 +4,23 @@
 
     <body>
         <div class="container">
-
-            <%- include('navbar.ejs', {isAdmin: isAdmin}); %>
-
+            <%- include('navbar.ejs', { isAdmin: isAdmin }); %>
+    
+            <% if (isAdmin) { %>
+                
+                <h3>Dados dos Alunos:</h3>
+                <ul>
+                    <% studentFormData.forEach(function (formData) { %>
+                        <li>
+                            <p>Nome: <%= formData.nomeMembroUMa %></p>
+                            <p>Número Mecanográfico: <%= formData.numberMembroUMa %></p>
+                            
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                
+            <% } %>
         </div>
     </body>
 
