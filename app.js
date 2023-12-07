@@ -17,6 +17,7 @@ var usersRouter = require("./routes/users");
 var loginRouter = require("./routes/login");
 var contactarRouter = require("./routes/contactar");
 var getPassRouter = require("./routes/getPass");
+var emitPassRouter = require("./routes/emitPass");
 
 var app = express();
 // view engine setup
@@ -42,6 +43,7 @@ app.use("/login", loginRouter);
 app.use("/users", usersRouter);
 app.use("/contactar", contactarRouter);
 app.use("/getPass", getPassRouter);
+app.use("/emitPass", emitPassRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
