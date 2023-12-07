@@ -9,12 +9,12 @@ router.get("/", function (req, res, next) {
 router.post("/", function (req, res, next) {
     const formData = {
         nomeMembroUMa: req.body.nomeMembroUMa,
-        nomeMembroUMa: req.body.nomeMembroUMa,
         numberMembroUMa: req.body.numberMembroUMa,
         CCMembroUMa: req.body.CCMembroUMa,
         cartaoMembroUMa: req.body.cartaoMembroUMa,
         tipoPasse: req.body.tipoPasse,
-        comprovativoMorada: req.body.comprovativoMorada
+        comprovativoMorada: req.body.comprovativoMorada,
+        emitted: false
     }
 
     req.session.studentFormData = req.session.studentFormData || []
