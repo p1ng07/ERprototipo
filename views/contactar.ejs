@@ -1,75 +1,96 @@
 <!DOCTYPE html>
 <html>
+  <%- include('head.ejs', {title: 'Contacto'}); %>
 
-<head>
-    <title>Contactar</title>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <style>
-        body {
-            background-color: rgb(221, 224, 221);
-        }
-    </style>
-</head>
-
-<body>
+  <body>
     <div class="container">
-        <header>
-            <%- include('navbar.ejs'); %>
-        </header>
+      <header><%- include('navbar.ejs'); %></header>
 
-        <h3 class="text-center mt-3">Envie-nos um email</h3>
+      <h3 class="text-center mt-3">Envie-nos um email</h3>
 
-        <!-- Lado esquerdo do ecrã -->
-        <div class="row justify-content-between">
-            <div class="col-md-8">
-                <div class="shadow-lg p-3 mt-3 bg-white rounded">
-                    <form action="/contactar" method="post">
+      <!-- Lado esquerdo do ecrã -->
+      <div class="row justify-content-between">
+        <div class="col-md-8">
+          <div class="shadow-lg p-3 mt-3 bg-white rounded">
+            <form action="/contactar" method="post">
+              <!-- nome do membro da UMa-->
+              <div class="form-group">
+                <label for="nomeMembroUMa"
+                  >Nome <span style="color: red">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="nomeMembroUMa"
+                  id="nomeMembroUMa"
+                  placeholder="Nome"
+                  required
+                />
+              </div>
 
-                        <!-- nome do membro da UMa-->
-                        <div class="form-group">
-                            <label for="nomeMembroUMa">Nome <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" name="nomeMembroUMa" id="nomeMembroUMa" placeholder="Nome" required>
-                        </div>
+              <!-- email do membro da UMa -->
+              <div class="form-group">
+                <label for="emailMembroUMa"
+                  >Email <span style="color: red">*</span></label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  name="emailMembroUMa"
+                  id="emailMembroUMa"
+                  placeholder="nome@email.com"
+                  required
+                />
+              </div>
 
-                        <!-- email do membro da UMa -->
-                        <div class="form-group">
-                            <label for="emailMembroUMa">Email <span style="color: red;">*</span></label>
-                            <input type="email" class="form-control" name="emailMembroUMa" id="emailMembroUMa" placeholder="nome@email.com" required>
-                        </div>
+              <!-- assunto do email a enviar -->
+              <div class="form-group">
+                <label for="assuntoEmail"
+                  >Assunto <span style="color: red">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="assuntoEmail"
+                  id="assuntoEmail"
+                  placeholder="Assunto"
+                  required
+                />
+              </div>
 
-                        <!-- assunto do email a enviar -->
-                        <div class="form-group">
-                            <label for="assuntoEmail">Assunto <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" name="assuntoEmail" id="assuntoEmail" placeholder="Assunto" required>
-                        </div>
+              <!-- mensagem a enviar -->
+              <div class="form-group">
+                <label for="mensagemEmail"
+                  >Mensagem <span style="color: red">*</span></label
+                >
+                <textarea
+                  class="form-control"
+                  name="mensagemEmail"
+                  id="mensagemEmail"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
 
-                        <!-- mensagem a enviar -->
-                        <div class="form-group">
-                            <label for="mensagemEmail">Mensagem <span style="color: red;">*</span></label>
-                            <textarea class="form-control" name="mensagemEmail" id="mensagemEmail" rows="4" required></textarea>
-                        </div>
+              <button type="submit" class="btn btn-outline-dark">Enviar</button>
 
-                        <button type="submit" class="btn btn-outline-dark">Enviar</button>
-
-                        <% if (sended == true) { %>
-                            <p class="text-center mt-3">Email enviado com sucesso!!</p>
-                        <% } %>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Lado direito do ecrã -->
-            <div class="col-md-4">
-                <div class="shadow-lg p-3 mt-3  bg-white rounded">
-                    <img src="/img/bus2.jpg" class="img-thumbnail">
-                    <p class="text-center mt-3">Caminho da Penteada, 9020-105 Funchal</p>
-                </div>
-            </div>
+              <% if (sended == true) { %>
+              <p class="text-center mt-3">Email enviado com sucesso!!</p>
+              <% } %>
+            </form>
+          </div>
         </div>
-    </div>
 
-</body>
+        <!-- Lado direito do ecrã -->
+        <div class="col-md-4">
+          <div class="shadow-lg p-3 mt-3 bg-white rounded">
+            <img src="/img/bus2.jpg" class="img-thumbnail" />
+            <p class="text-center mt-3">
+              Caminho da Penteada, 9020-105 Funchal
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
