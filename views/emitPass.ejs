@@ -7,7 +7,7 @@
             <%- include('navbar.ejs', { isAdmin: isAdmin }); %>
 
             <div class="table-responsive">
-                <table class="table table-hover align-middle mt-5">
+                <table class="table table-hover text-center mt-5">
                     <thead>
                         <tr>
                         <th scope="col">Nome</th>
@@ -35,16 +35,16 @@
                             <% if (formData.emitted  == false) { %>
                                 <td>
                                     <form method="post" action="/emitPass/emitir/<%= index %>">
-                                        <button type="submit" class="btn btn-primary">Emitir</button>
+                                        <button type="submit" class="btn btn-primary btn-block">Emitir</button>
                                     </form>
                                     <form method="post" action="/emitPass/apagar/<%= index %>">
-                                        <button type="submit" class="btn btn-danger mt-1">Apagar</button>
+                                        <button type="submit" class="btn btn-danger mt-1 btn-block">Apagar</button>
                                     </form>
                                 </td>
                             <% } else { %>
                                 <td>Emitido 
                                     <form method="post" action="/emitPass/apagar/<%= index %>">
-                                        <button type="submit" class="btn btn-danger mt-1">Apagar</button>
+                                        <button type="submit" class="btn btn-danger mt-1 btn-block">Apagar</button>
                                     </form>
                                 </td>
                             <% } %>
