@@ -24,11 +24,11 @@
                             <tr>
                             <td><%= formData.nomeMembroUMa %></td>
                             <td><%= formData.numberMembroUMa %></td>
-                            <td><%= formData.CCMembroUMa %></td>
-                            <td><%= formData.cartaoMembroUMa %></td>
+                            <td><img src="<%= formData.CCMembroUMa %>" class="img-fluid" style="width: 300px; height: 300px;"></td>
+                            <td><img src="<%= formData.cartaoMembroUMa %>" class="img-fluid" style="width: 300px; height: 300px;"></td>
                             <td><%= formData.tipoPasse %></td>
                             <% if (formData.tipoPasse  == 'interurbano') { %>
-                                <td><%= formData.comprovativoMorada %></td>
+                                <td><img src="<%= formData.comprovativoMorada %>" class="img-fluid" style="width: 300px; height: 300px;"></td>
                             <% } else { %>
                                 <td>Desnecessário</td>
                             <% } %>
