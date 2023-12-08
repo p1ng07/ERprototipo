@@ -4,20 +4,31 @@
 
   <body>
     <div class="container">
-        <header>
-            <%- include('navbar.ejs'); %>
-        </header>
-
         <div class="shadow-lg p-3 mt-3 bg-white rounded">
             <h3 class="text-center">Cria a tua conta</h3>
-            <form  method="post">
-
-                <!-- email -->
+            <form action="/registo" method="post">
+                <!--verifica criação do email -->
                 <div class="form-group">
-                    <label for="emailMembroUMa">Email</label>
-                    <input type="email" class="form-control" id="emailMembroUMa" placeholder="nome@email.com">
-                </div>
+                    <% if (error_check_email == true) { %>
+                    <div>
+                        <label for="check_email">Email</label>
+                    </div>
+                    <div>
+                        <label for="check_email" class="text-danger">
+                            O Email é de preenchimento obrigatório.
+                        </label>
+                    </div>
 
+                    <% } else { %>
+                        <label for="check_email">Email</label>
+                    <% } %>
+                    <input type="email" 
+                    class="form-control" 
+                    id="check_email" 
+                    name="check_email"
+                    placeholder="nome@email.com"/>
+                </div>
+                
                 <!-- numero de membro da UMa -->
                 <div class="form-group">
                     <label for="numeroMembroUMa">Número</label>
@@ -44,7 +55,7 @@
                     </label>
                 </div>
 
-                <button type="button" class="btn btn-outline-dark">Criar conta</button>
+                <button type="submit" class="btn btn-outline-dark">Criar conta</button>
             </form>
         </div>
     </div>

@@ -15,6 +15,7 @@ const sessionMiddleware = session({
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var loginRouter = require("./routes/login");
+var registoRouter = require("./routes/registo");
 var contactarRouter = require("./routes/contactar");
 var getPassRouter = require("./routes/getPass");
 var emitPassRouter = require("./routes/emitPass");
@@ -44,6 +45,7 @@ app.use("/users", usersRouter);
 app.use("/contactar", contactarRouter);
 app.use("/getPass", getPassRouter);
 app.use("/emitPass", emitPassRouter);
+app.use("/registo", registoRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
