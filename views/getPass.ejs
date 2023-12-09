@@ -17,42 +17,79 @@
                 <!-- nome do membro da UMa-->
                 <div class="form-group">
                     <label for="nomeMembroUMa">Nome <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" name="nomeMembroUMa" id="nomeMembroUMa" placeholder="Nome"
-                        required>
+                    <% if(nome_error == true) { %>
+                        <div>
+                            <label for="nomeMembroUMa" class="text-danger">Campo obrigatório</label>
+                        </div>
+                    <% } %>
+                    <input type="text" class="form-control" name="nomeMembroUMa" id="nomeMembroUMa" placeholder="Nome">
                 </div>
 
                 <!-- numero do membro da UMa -->
                 <div class="form-group">
                     <label for="numberMembroUMa">Número mecanográfico <span style="color: red;">*</span></label>
+                    <% if(numero_error == true) { %>
+                        <div>
+                            <label for="nomeMembroUMa" class="text-danger">Campo obrigatório e o número tem que ter 7 dígitos</label>
+                        </div>
+                    <% } %>
                     <input type="number" class="form-control" name="numberMembroUMa" id="numberMembroUMa"
-                        placeholder="ex: 2078320" required>
+                        placeholder="ex: 2078320">
                 </div>
 
                 <!-- Foto CC do membro da UMa -->
                 <div class="form-group">
                     <label for="CCMembroUMa">Cartão de cidadão (frente e verso .jpg) <span
                             style="color: red;">*</span></label>
-                    <input type="file" class="form-control" name="CCMembroUMa" id="CCMembroUMa" required multiple>
+                            <% if(cc_error == true) { %>
+                                <div>
+                                    <label for="nomeMembroUMa" class="text-danger">Campo obrigatório, máximo de 2 ficheiros .jpg</label>
+                                </div>
+                            <% } %>
+                    <input type="file" class="form-control" name="CCMembroUMa" id="CCMembroUMa" multiple>
                 </div>
 
                 <!-- Foto do cartão do membro da UMa -->
                 <div class="form-group">
                     <label for="cartaoMembroUMa">Foto do cartão (.jpg)<span style="color: red;">*</span></label>
-                    <input type="file" class="form-control" name="cartaoMembroUMa" id="cartaoMembroUMa" required multiple>
+                    <% if(cartao_error == true) { %>
+                        <div>
+                            <label for="nomeMembroUMa" class="text-danger">Campo obrigatório, máximo de 2 ficheiros .jpg</label>
+                        </div>
+                    <% } %>
+                    <input type="file" class="form-control" name="cartaoMembroUMa" id="cartaoMembroUMa" multiple>
                 </div>
 
                 <div class="form-group">
                     <label for="tipoPasse">Tipo de passe <span style="color: red;">*</span></label>
-                    <select name="tipoPasse" id="tipoPasse" required>
-                        <option value=""></option>
-                        <option value="Urbano">Urbano</option>
-                        <option value="Interurbano">Interurbano</option>
-                    </select>
+                    <% if(tipo_error == true) { %>
+                        <div>
+                            <label for="nomeMembroUMa" class="text-danger">Campo obrigatório</label>
+                        </div>
+                    <% } %>
+                    <% if(comprovativo_error == true) { %>
+                        <select name="tipoPasse" id="tipoPasse">
+                            <option value=""></option>
+                            <option value="Urbano">Urbano</option>
+                            <option value="Interurbano" selected>Interurbano</option>
+                        </select>
+                    <% } else { %>
+                        <select name="tipoPasse" id="tipoPasse">
+                            <option value=""></option>
+                            <option value="Urbano">Urbano</option>
+                            <option value="Interurbano">Interurbano</option>
+                        </select>
+                    <% } %>
                 </div>
 
-                <div id="arquivoInterurbano" style="display: none;">
+                <div id="arquivoInterurbano" class="<%= comprovativo_error ? 'display-block' : 'display-none' %>">
                     <div class="form-group">
                         <label for="comprovativoMorada">Arquivo Interurbano <span style="color: red;">*</span></label>
+                        <% if(comprovativo_error == true) { %>
+                            <div>
+                                <label for="nomeMembroUMa" class="text-danger">Campo obrigatório, máximo de 2 ficheiros .jpg</label>
+                            </div>
+                        <% } %>
                         <input type="file" class="form-control" name="comprovativoMorada" id="comprovativoMorada" multiple>
                     </div>
                 </div>
@@ -63,7 +100,7 @@
         <script>
             $(document).ready(function () {
                 $('#tipoPasse').change(function () {
-                    if ($(this).val() === 'interurbano') {
+                    if ($(this).val() === 'Interurbano') {
                         $('#arquivoInterurbano').show();
                     } else {
                         $('#arquivoInterurbano').hide();
