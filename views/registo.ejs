@@ -31,20 +31,66 @@
                 
                 <!-- numero de membro da UMa -->
                 <div class="form-group">
-                    <label for="numeroMembroUMa">Número</label>
-                    <input type="number" class="form-control" id="numeroMembroUMa" placeholder="ex: 2087624">
+                    <% if (error_check_number == true) { %>
+                        <div>
+                            <label for="check_numero">Número</label>
+                        </div>
+                    
+                    <div>
+                        <label for="check_numero" class="text-danger">
+                            O Número é de preenchimento obrigatório.
+                        </label>
+                    </div>
+                    <% } else { %>
+                        <label for="check_numero">Número</label>
+                    <% } %>
+                    <input type="number" 
+                    class="form-control" 
+                    id="check_numero"
+                    name="check_numero"; 
+                    placeholder="ex: 2087624">
                 </div>
 
                 <!-- Criação da password -->
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <% if ( error_check_password == true) { %>
+                    <label for="check_password">Password</label>
+                    <div>
+                        <label for="check_password" class="text-danger">
+                            A Password é de preenchimento obrigatório.
+                        </label>
+                    </div>
+                    <% } else { %>
+                        <label>
+                            <label for="check_numero">Password</label>
+                        </label>
+                    <% } %>
+                    <input type="password" 
+                    class="form-control" 
+                    id="check_password" 
+                    name="check_password"
+                    placeholder="Password">
                 </div>
 
                 <!-- Confirmação da password -->
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Confirmar Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirmar Password">
+                    <% if (error_check_confirma_password == true) { %>
+                    <label for="check_confirma_password">Confirmar Password</label>
+                    <div>
+                        <label for="check_confirma_password" class="text-danger">
+                            O Confirmar Password é de preenchimento obrigatório.
+                        </label>
+                    </div>
+                    <% } else { %>
+                        <label>
+                            <label for="check_numero">Confirmar Password</label>
+                        </label>
+                    <% } %>
+                    <input type="password" 
+                    class="form-control" 
+                    id="check_confirma_password" 
+                    name="check_confirma_password"
+                    placeholder="Confirmar Password">
                 </div>
 
                 <!-- Achei engraçado ter isto -->
