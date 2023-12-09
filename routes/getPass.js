@@ -21,20 +21,29 @@ router.get("/", function (req, res, next) {
 });
 
 router.post("/", upload.fields([
-    { name: 'CCMembroUMa', maxCount: 1 },
-    { name: 'cartaoMembroUMa', maxCount: 1 },
-    { name: 'comprovativoMorada', maxCount: 1 }
+    { name: 'CCMembroUMa' },
+    { name: 'cartaoMembroUMa' },
+    { name: 'comprovativoMorada' }
 ]), function (req, res, next) {
     try {
         const formData = {
             nomeMembroUMa: req.body.nomeMembroUMa,
             numberMembroUMa: req.body.numberMembroUMa,
-            CCMembroUMa: '/uploads/' + req.files['CCMembroUMa'][0].filename,
-            cartaoMembroUMa: '/uploads/' + req.files['cartaoMembroUMa'][0].filename,
+            CCMembroUMa: Array.isArray(req.files['CCMembroUMa']) ?
+                req.files['CCMembroUMa'].map(file => '/uploads/' + file.filename) :
+                '/uploads/' + req.files['CCMembroUMa'][0].filename,
+            cartaoMembroUMa: Array.isArray(req.files['cartaoMembroUMa']) ?
+                req.files['cartaoMembroUMa'].map(file => '/uploads/' + file.filename) :
+                '/uploads/' + req.files['cartaoMembroUMa'][0].filename,
             tipoPasse: req.body.tipoPasse,
-            comprovativoMorada: req.files['comprovativoMorada'] ? '/uploads/' + req.files['comprovativoMorada'][0].filename : null,
+            comprovativoMorada: req.files['comprovativoMorada'] ?
+                Array.isArray(req.files['comprovativoMorada']) ?
+                    req.files['comprovativoMorada'].map(file => '/uploads/' + file.filename) :
+                    '/uploads/' + req.files['comprovativoMorada'][0].filename :
+                null,
             emitted: false
         };
+
 
         req.session.studentFormData = req.session.studentFormData || [];
         req.session.studentFormData.push(formData);
