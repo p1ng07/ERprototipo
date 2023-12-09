@@ -18,13 +18,17 @@
                 <label for="nomeMembroUMa"
                   >Nome <span style="color: red">*</span></label
                 >
+                <% if(nome_error == true) { %>
+                  <div>
+                      <label for="nomeMembroUMa" class="text-danger">Campo obrigatório</label>
+                  </div>
+                <% } %>
                 <input
                   type="text"
                   class="form-control"
                   name="nomeMembroUMa"
                   id="nomeMembroUMa"
                   placeholder="Nome"
-                  required
                 />
               </div>
 
@@ -33,13 +37,17 @@
                 <label for="emailMembroUMa"
                   >Email <span style="color: red">*</span></label
                 >
+                <% if(email_error == true) { %>
+                  <div>
+                      <label for="emailMembroUMa" class="text-danger">Email inválido</label>
+                  </div>
+                <% } %>
                 <input
-                  type="email"
+                  type="text"
                   class="form-control"
                   name="emailMembroUMa"
                   id="emailMembroUMa"
                   placeholder="nome@email.com"
-                  required
                 />
               </div>
 
@@ -48,13 +56,17 @@
                 <label for="assuntoEmail"
                   >Assunto <span style="color: red">*</span></label
                 >
+                <% if(assunto_error == true) { %>
+                  <div>
+                      <label for="assuntoEmail" class="text-danger">Campo obrigatório</label>
+                  </div>
+                <% } %>
                 <input
                   type="text"
                   class="form-control"
                   name="assuntoEmail"
                   id="assuntoEmail"
                   placeholder="Assunto"
-                  required
                 />
               </div>
 
@@ -63,12 +75,16 @@
                 <label for="mensagemEmail"
                   >Mensagem <span style="color: red">*</span></label
                 >
+                <% if(mensagem_error == true) { %>
+                  <div>
+                      <label for="mensagemEmail" class="text-danger">Campo obrigatório</label>
+                  </div>
+                <% } %>
                 <textarea
                   class="form-control"
                   name="mensagemEmail"
                   id="mensagemEmail"
                   rows="4"
-                  required
                 ></textarea>
               </div>
 

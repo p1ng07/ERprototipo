@@ -30,7 +30,7 @@
                     <label for="numberMembroUMa">Número mecanográfico <span style="color: red;">*</span></label>
                     <% if(numero_error == true) { %>
                         <div>
-                            <label for="nomeMembroUMa" class="text-danger">Campo obrigatório e o número tem que ter 7 dígitos</label>
+                            <label for="numberMembroUMa" class="text-danger">Campo obrigatório e o número tem que ter 7 dígitos</label>
                         </div>
                     <% } %>
                     <input type="number" class="form-control" name="numberMembroUMa" id="numberMembroUMa"
@@ -43,7 +43,7 @@
                             style="color: red;">*</span></label>
                             <% if(cc_error == true) { %>
                                 <div>
-                                    <label for="nomeMembroUMa" class="text-danger">Campo obrigatório, máximo de 2 ficheiros .jpg</label>
+                                    <label for="CCMembroUMa" class="text-danger">Campo obrigatório, máximo de 2 ficheiros .jpg</label>
                                 </div>
                             <% } %>
                     <input type="file" class="form-control" name="CCMembroUMa" id="CCMembroUMa" multiple>
@@ -54,7 +54,7 @@
                     <label for="cartaoMembroUMa">Foto do cartão (.jpg)<span style="color: red;">*</span></label>
                     <% if(cartao_error == true) { %>
                         <div>
-                            <label for="nomeMembroUMa" class="text-danger">Campo obrigatório, máximo de 2 ficheiros .jpg</label>
+                            <label for="cartaoMembroUMa" class="text-danger">Campo obrigatório, máximo de 2 ficheiros .jpg</label>
                         </div>
                     <% } %>
                     <input type="file" class="form-control" name="cartaoMembroUMa" id="cartaoMembroUMa" multiple>
@@ -64,7 +64,7 @@
                     <label for="tipoPasse">Tipo de passe <span style="color: red;">*</span></label>
                     <% if(tipo_error == true) { %>
                         <div>
-                            <label for="nomeMembroUMa" class="text-danger">Campo obrigatório</label>
+                            <label for="tipoPasse" class="text-danger">Campo obrigatório</label>
                         </div>
                     <% } %>
                     <% if(comprovativo_error == true) { %>
@@ -87,7 +87,7 @@
                         <label for="comprovativoMorada">Arquivo Interurbano <span style="color: red;">*</span></label>
                         <% if(comprovativo_error == true) { %>
                             <div>
-                                <label for="nomeMembroUMa" class="text-danger">Campo obrigatório, máximo de 2 ficheiros .jpg</label>
+                                <label for="comprovativoMorada" class="text-danger">Campo obrigatório, máximo de 2 ficheiros .jpg</label>
                             </div>
                         <% } %>
                         <input type="file" class="form-control" name="comprovativoMorada" id="comprovativoMorada" multiple>

@@ -8,10 +8,11 @@ var nodemailer = require("nodemailer")
 //Se quiserem aceder mesmo ao email a pass é: autocarrosUMa@@2000
 var email = "autocarrosuma@gmail.com"
 var pass = "ujfdzqglqdvikmxx"
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /* GET contacts page. */
 router.get("/", function (req, res, next) {
-    res.render("contactar", {sended: false})
+    res.render("contactar", {nome_error: false, email_error: false, assunto_error: false, mensagem_error: false, sended: false})
 })
 
 const transporter = nodemailer.createTransport({
@@ -25,19 +26,46 @@ const transporter = nodemailer.createTransport({
 router.post("/", function (req, res, next) {
     const { nomeMembroUMa, emailMembroUMa, assuntoEmail, mensagemEmail } = req.body
 
-    const mailData = {
-        from: email,
-        to: email,
-        subject: assuntoEmail,
-        text: `Nome: ${nomeMembroUMa}\nEmail: ${emailMembroUMa}\nMensagem: ${mensagemEmail}`
+    let nome_error = false;
+    let email_error = false;
+    let assunto_error = false;
+    let mensagem_error = false;
+    let sended = false;
+
+    if (nomeMembroUMa.length == 0) {
+        nome_error = true;
     }
 
-    transporter.sendMail(mailData, (error, info) => {
-        if (error) {
-            return res.status(500).send(error.toString());
+    if (!emailRegex.test(emailMembroUMa)) {
+        email_error = true;
+    }
+
+    if (assuntoEmail.length == 0) {
+        assunto_error = true;
+    }
+
+    if (mensagemEmail.length == 0) {
+        mensagem_error = true;
+    }
+
+    if (nome_error || email_error || assunto_error || mensagem_error) {
+        res.render("contactar", { nome_error, email_error, assunto_error, mensagem_error, sended })
+    } else {
+        const mailData = {
+            from: email,
+            to: email,
+            subject: assuntoEmail,
+            text: `Nome: ${nomeMembroUMa}\nEmail: ${emailMembroUMa}\nMensagem: ${mensagemEmail}`
         }
-        res.render("contactar", { sended: true })
-    })
+    
+        transporter.sendMail(mailData, (error, info) => {
+            if (error) {
+                return res.status(500).send(error.toString());
+            }
+            sended = true;
+            res.render("contactar", { nome_error, email_error, assunto_error, mensagem_error, sended })
+        })
+    }
 
 })
 
