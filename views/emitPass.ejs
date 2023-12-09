@@ -1,102 +1,61 @@
 <!DOCTYPE html>
 <html>
-<%- include('head.ejs', {title: 'Página principal' }); %>
+  <%- include('head.ejs', {title: 'Página principal' }); %>
 
-    <body>
-        <div class="container">
-            <%- include('navbar.ejs', { isAdmin: isAdmin }); %>
+  <body>
+    <div class="container">
+      <%- include('navbar.ejs', { isAdmin: isAdmin }); %>
 
-            <div class="table-responsive">
-                <table class="table table-hover text-center mt-5">
-                    <thead>
-                        <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Número mecanográfico</th>
-                        <th scope="col">Foto CC</th>
-                        <th scope="col">Foto cartão</th>
-                        <th scope="col">Tipo de passe</th>
-                        <th scope="col">Comprovativo de morada</th>
-                        <th scope="col">Ação</th>
-                        <th scope="col" class="visually-hidden">Id</th>
-                        </tr>
-                        <tbody>
-                            <% studentFormData.forEach(function (formData, index) { %>
-                            <tr>
-                            <td><%= formData.nomeMembroUMa %></td>
-                            <td><%= formData.numberMembroUMa %></td>
-                            <td>
-                                <% if (Array.isArray(formData.CCMembroUMa)) { %>
-                                  <% formData.CCMembroUMa.forEach(function (filename, index) { %>
-                                    <img src="<%= filename %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-toggle="modal" data-target="#imageModal">
-                                  <% }); %>
-                                <% } else { %>
-                                  <img src="<%= formData.CCMembroUMa %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= formData.CCMembroUMa %>')" data-toggle="modal" data-target="#imageModal">
-                                <% } %>
-                              </td>
-                            <td>
-                                <% if (Array.isArray(formData.cartaoMembroUMa)) { %>
-                                    <% formData.cartaoMembroUMa.forEach(function (filename, index) { %>
-                                        <img src="<%= filename %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-toggle="modal" data-target="#imageModal">
-                                    <% }); %>
-                                <% } else { %>
-                                    <img src="<%= formData.cartaoMembroUMa %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-toggle="modal" data-target="#imageModal">
-                                <% } %>
-                            </td>
-                            <td><%= formData.tipoPasse %></td>
-                            <% if (formData.tipoPasse  == 'Interurbano') { %>
-                                <td>
-                                    <% if (Array.isArray(formData.comprovativoMorada)) { %>
-                                        <% formData.comprovativoMorada.forEach(function (filename, index) { %>
-                                            <img src="<%= filename %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-toggle="modal" data-target="#imageModal">
-                                        <% }); %>
-                                    <% } else { %>
-                                        <img src="<%= formData.comprovativoMorada %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-toggle="modal" data-target="#imageModal">
-                                    <% } %>
-                                </td>
-                            <% } else { %>
-                                <td>Desnecessário</td>
-                            <% } %>
-                            <% if (formData.emitted  == false) { %>
-                                <td>
-                                    <form method="post" action="/emitPass/emitir/<%= index %>">
-                                        <button type="submit" class="btn btn-primary btn-block">Emitir</button>
-                                    </form>
-                                    <form method="post" action="/emitPass/apagar/<%= index %>">
-                                        <button type="submit" class="btn btn-danger mt-1 btn-block">Apagar</button>
-                                    </form>
-                                </td>
-                            <% } else { %>
-                                <td>Emitido 
-                                    <form method="post" action="/emitPass/apagar/<%= index %>">
-                                        <button type="submit" class="btn btn-danger mt-1 btn-block">Apagar</button>
-                                    </form>
-                                </td>
-                            <% } %>
-                            </tr>
-                            <td class="visually-hidden"><%= index %></td>
-                            <% }) %>
-                        </tbody>
-                    </thead>
-                </table>   
-                
-            </div> 
-        </div>
-        <div class="modal fade justify-content-center align-items-center" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl d-flex justify-content-center align-items-center">
-                <div class="modal-content justify-content-center align-items-center">
-                    <div class="modal-body justify-content-center align-items-center">
-                        <img id="modalImage" src="" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script>
-            function displayImage(imageSrc) {
-              const modalImage = document.getElementById('modalImage');
-              modalImage.src = imageSrc;
-            }
-        </script>
-          
-    </body>
+      <div class="table-responsive">
+        <table class="table table-hover text-center mt-5">
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Número mecanográfico</th>
+              <th scope="col">Foto CC</th>
+              <th scope="col">Foto cartão</th>
+              <th scope="col">Tipo de passe</th>
+              <th scope="col">Comprovativo de morada</th>
+              <th scope="col">Ação</th>
+              <th scope="col" class="visually-hidden">Id</th>
+            </tr>
+            <tbody>
+              <% studentFormData.forEach(function (formData, index) { %>
+              <tr>
+                <td><%= formData.nomeMembroUMa %></td>
+                <td><%= formData.numberMembroUMa %></td>
+                <td><%= formData.CCMembroUMa %></td>
+                <td><%= formData.cartaoMembroUMa %></td>
+                <td><%= formData.tipoPasse %></td>
+                <% if (formData.tipoPasse  == 'interurbano') { %>
+                <td><%= formData.comprovativoMorada %></td>
+                <% } else { %>
+                <td>Desnecessário</td>
+                <% } %>
+                <% if (formData.emitted  == false) { %>
+                <td>
+                  <form method="post" action="/emitPass/emitir/<%= index %>">
+                    <button type="submit" class="btn btn-primary btn-block">Emitir</button>
+                  </form>
+                  <form method="post" action="/emitPass/apagar/<%= index %>">
+                    <button type="submit" class="btn btn-danger mt-1 btn-block">Apagar</button>
+                  </form>
+                </td>
+                <% } else { %>
+                <td>Emitido 
+                  <form method="post" action="/emitPass/apagar/<%= index %>">
+                    <button type="submit" class="btn btn-danger mt-1 btn-block">Apagar</button>
+                  </form>
+                </td>
+                <% } %>
+              </tr>
+              <td class="visually-hidden"><%= index %></td>
+              <% }) %>
+            </tbody>
+          </thead>
+        </table>   
+      </div> 
+    </div>
+  </body>
 
 </html>
