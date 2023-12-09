@@ -19,6 +19,7 @@ var registoRouter = require("./routes/registo");
 var contactarRouter = require("./routes/contactar");
 var getPassRouter = require("./routes/getPass");
 var emitPassRouter = require("./routes/emitPass");
+var horariosRouter = require("./routes/horarios");
 
 var app = express();
 // view engine setup
@@ -46,6 +47,7 @@ app.use("/contactar", contactarRouter);
 app.use("/getPass", getPassRouter);
 app.use("/emitPass", emitPassRouter);
 app.use("/registo", registoRouter);
+app.use("/horarios", horariosRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
