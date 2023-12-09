@@ -4,61 +4,84 @@
 
   <body>
     <div class="container">
-        <div class="shadow-lg p-3 mt-3 bg-white rounded">
-            <h3 class="text-center">Cria a tua conta</h3>
-            <form action="/registo" method="post">
-                <!--verifica criação do email -->
-                <div class="form-group">
-                    <% if (error_check_email == true) { %>
-                    <div>
-                        <label for="check_email">Email</label>
-                    </div>
-                    <div>
-                        <label for="check_email" class="text-danger">
-                            O Email é de preenchimento obrigatório.
-                        </label>
-                    </div>
+      <div class="shadow-lg p-3 mt-3 bg-white rounded">
+        <h3 class="text-center">Cria a tua conta</h3>
+        <form action="/registo" method="post">
+          <!--verifica criação do email -->
+          <div class="form-group">
+            <% if (error_check_email == true) { %>
+            <div>
+              <label for="check_email">Email</label>
+            </div>
+            <div>
+              <label for="check_email" class="text-danger">
+                O Email é de preenchimento obrigatório.
+              </label>
+            </div>
 
-                    <% } else { %>
-                        <label for="check_email">Email</label>
-                    <% } %>
-                    <input type="email" 
-                    class="form-control" 
-                    id="check_email" 
-                    name="check_email"
-                    placeholder="nome@email.com"/>
-                </div>
-                
-                <!-- numero de membro da UMa -->
-                <div class="form-group">
-                    <label for="numeroMembroUMa">Número</label>
-                    <input type="number" class="form-control" id="numeroMembroUMa" placeholder="ex: 2087624">
-                </div>
+            <% } else { %>
+            <label for="check_email">Email</label>
+            <% } %>
+            <input
+              type="email"
+              class="form-control"
+              id="check_email"
+              name="check_email"
+              placeholder="nome@email.com"
+            />
+          </div>
 
-                <!-- Criação da password -->
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
+          <!-- numero de membro da UMa -->
+          <div class="form-group">
+            <label for="numeroMembroUMa">Número</label>
+            <input
+              type="number"
+              class="form-control"
+              id="numeroMembroUMa"
+              placeholder="ex: 2087624"
+            />
+          </div>
 
-                <!-- Confirmação da password -->
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Confirmar Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirmar Password">
-                </div>
+          <!-- Criação da password -->
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              exampleInputPassword1id="exampleInputPassword1"
+              placeholder="Password"
+            />
+          </div>
 
-                <!-- Achei engraçado ter isto -->
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check">
-                    <label class="form-check-label" for="check">
-                        Concordo com os termos e condições
-                    </label>
-                </div>
+          <!-- Confirmação da password -->
+          <div class="form-group">
+            <label for="exampleInputPassword1">Confirmar Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="Confirmar Password"
+            />
+          </div>
 
-                <button type="submit" class="btn btn-outline-dark">Criar conta</button>
-            </form>
-        </div>
+          <!-- Achei engraçado ter isto -->
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="check"
+            />
+            <label class="form-check-label" for="check">
+              Concordo com os termos e condições
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-outline-dark">
+            Criar conta
+          </button>
+        </form>
+      </div>
     </div>
-
   </body>
 </html>
