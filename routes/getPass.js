@@ -18,7 +18,7 @@ const upload = multer({ storage: storage });
 
 /* GET Pedir passe page. */
 router.get("/", function (req, res, next) {
-    res.render("getPass", { nome_error: false, numero_error: false, cc_error: false, cartao_error: false, tipo_error: false, comprovativo_error: false })
+    res.render("getPass", { nome_error: false, cc_error: false, cartao_error: false, tipo_error: false, comprovativo_error: false })
 });
 
 router.post("/", upload.fields([
@@ -26,10 +26,9 @@ router.post("/", upload.fields([
     { name: 'cartaoMembroUMa' },
     { name: 'comprovativoMorada' }
 ]), function (req, res, next) {
-    const { nomeMembroUMa, numberMembroUMa, tipoPasse } = req.body;
+    const { nomeMembroUMa, tipoPasse } = req.body;
 
     let nome_error = false;
-    let numero_error = false;
     let cc_error = false;
     let cc_file_error = false;
     let cartao_error = false;
@@ -40,10 +39,6 @@ router.post("/", upload.fields([
 
     if (nomeMembroUMa.length == 0) {
         nome_error = true;
-    }
-
-    if (numberMembroUMa.length !== 7) {
-        numero_error = true;
     }
 
     if (req.files['CCMembroUMa']) {
@@ -89,13 +84,24 @@ router.post("/", upload.fields([
         comprovativo_error = true;
     }
 
-    if (nome_error || numero_error || cc_error || cartao_error || tipo_error || comprovativo_error) {
-        res.render("getPass", { nome_error, numero_error, cc_error, cartao_error, tipo_error, comprovativo_error });
+    if (nome_error || cc_error || cartao_error || tipo_error || comprovativo_error) {
+        res.render("getPass", { nome_error, cc_error, cartao_error, tipo_error, comprovativo_error });
     } else {
         try {
+            let numeroUMa;
+            const account_list = JSON.parse(fs.readFileSync("./contas.json"));
+            const account = account_list.find(account => account.email === req.session.email)
+            if (account) {
+                numeroUMa = account.numero;
+                account.getPass = true;
+                fs.writeFile("./contas.json", JSON.stringify(account_list), (error) => {
+                    if (error) throw error;
+                });
+            }
+
             const formData = {
                 nomeMembroUMa: req.body.nomeMembroUMa,
-                numberMembroUMa: req.body.numberMembroUMa,
+                numberMembroUMa: numeroUMa,
                 CCMembroUMa: Array.isArray(req.files['CCMembroUMa']) ?
                     req.files['CCMembroUMa'].map(file => '/uploads/' + file.filename) :
                     '/uploads/' + req.files['CCMembroUMa'][0].filename,
@@ -111,16 +117,7 @@ router.post("/", upload.fields([
                 emitted: false,
                 emailAssociado: req.session.email
             };
-
-            const account_list = JSON.parse(fs.readFileSync("./contas.json"));
-            const account = account_list.find(account => account.email === req.session.email)
-
-            if (account) {
-                account.getPass = true;
-                fs.writeFile("./contas.json", JSON.stringify(account_list), (error) => {
-                    if (error) throw error;
-                });
-            }
+            console.log(formData)
 
             req.session.studentFormData = req.session.studentFormData || [];
             req.session.studentFormData.push(formData);
