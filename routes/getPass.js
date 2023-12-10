@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var multer = require("multer");
+var fs = require("fs");
 const path = require('path');
 
 const storage = multer.diskStorage({
@@ -48,7 +49,7 @@ router.post("/", upload.fields([
     if (req.files['CCMembroUMa']) {
         req.files['CCMembroUMa'].forEach(file => {
             const fileName = file.originalname;
-            if (fileName.toLowerCase().endsWith('jpg')) {} else {
+            if (fileName.toLowerCase().endsWith('jpg')) { } else {
                 cc_file_error = true;
             }
         });
@@ -57,7 +58,7 @@ router.post("/", upload.fields([
     if (req.files['cartaoMembroUMa']) {
         req.files['cartaoMembroUMa'].forEach(file => {
             const fileName = file.originalname;
-            if (fileName.toLowerCase().endsWith('jpg')) {} else {
+            if (fileName.toLowerCase().endsWith('jpg')) { } else {
                 cartao_file_error = true;
             }
         });
@@ -66,7 +67,7 @@ router.post("/", upload.fields([
     if (req.files['comprovativoMorada']) {
         req.files['comprovativoMorada'].forEach(file => {
             const fileName = file.originalname;
-            if (fileName.toLowerCase().endsWith('jpg')) {} else {
+            if (fileName.toLowerCase().endsWith('jpg')) { } else {
                 comprovativo_file_error = true;
             }
         });
@@ -107,9 +108,19 @@ router.post("/", upload.fields([
                         req.files['comprovativoMorada'].map(file => '/uploads/' + file.filename) :
                         '/uploads/' + req.files['comprovativoMorada'][0].filename :
                     null,
-                emitted: false
+                emitted: false,
+                emailAssociado: req.session.email
             };
 
+            const account_list = JSON.parse(fs.readFileSync("./contas.json"));
+            const account = account_list.find(account => account.email === req.session.email)
+
+            if (account) {
+                account.getPass = true;
+                fs.writeFile("./contas.json", JSON.stringify(account_list), (error) => {
+                    if (error) throw error;
+                });
+            }
 
             req.session.studentFormData = req.session.studentFormData || [];
             req.session.studentFormData.push(formData);
