@@ -18,8 +18,12 @@ const upload = multer({ storage: storage });
 
 /* GET Pedir passe page. */
 router.get("/", function (req, res, next) {
-    res.render("getPass", { nome_error: false, cc_error: false, cartao_error: false, tipo_error: false, comprovativo_error: false })
+    res.render("getPass", { nome_error: false, cc_error: false, cartao_error: false, tipo_error: false, comprovativo_error: false, changeType: false })
 });
+
+router.get("/tipo", function (req, res, next) {
+    res.render("getPass", { nome_error: false, cc_error: false, cartao_error: false, tipo_error: false, comprovativo_error: false, changeType: true })
+})
 
 router.post("/", upload.fields([
     { name: 'CCMembroUMa' },
@@ -85,7 +89,7 @@ router.post("/", upload.fields([
     }
 
     if (nome_error || cc_error || cartao_error || tipo_error || comprovativo_error) {
-        res.render("getPass", { nome_error, cc_error, cartao_error, tipo_error, comprovativo_error });
+        res.render("getPass", { nome_error, cc_error, cartao_error, tipo_error, comprovativo_error});
     } else {
         try {
             let numeroUMa;
@@ -117,10 +121,69 @@ router.post("/", upload.fields([
                 emitted: false,
                 emailAssociado: req.session.email
             };
-            console.log(formData)
 
             req.session.studentFormData = req.session.studentFormData || [];
             req.session.studentFormData.push(formData);
+            res.redirect('/');
+        } catch (error) {
+            next(error);
+        }
+    }
+});
+
+router.post("/tipo", upload.fields([
+    { name: 'comprovativoMorada' }
+]), function (req, res, next) {
+
+    const { tipoPasse } = req.body;
+
+    let tipo_error = false;
+    let comprovativo_error = false;
+    let comprovativo_file_error = false;
+
+    if (req.files['comprovativoMorada']) {
+        req.files['comprovativoMorada'].forEach(file => {
+            const fileName = file.originalname;
+            if (fileName.toLowerCase().endsWith('jpg')) { } else {
+                comprovativo_file_error = true;
+            }
+        });
+    }
+
+    if (tipoPasse != 'Interurbano' && tipoPasse != 'Urbano') {
+        tipo_error = true;
+    }
+
+    if (tipoPasse == 'Interurbano' && (!req.files['comprovativoMorada'] || req.files['comprovativoMorada'].length == 0 || req.files['comprovativoMorada'].length > 2 || comprovativo_file_error)) {
+        comprovativo_error = true;
+    }
+
+    if (tipo_error || comprovativo_error) {
+        res.render("getPass/tipo", { tipo_error, comprovativo_error});
+    } else {
+        try {
+            const account_list = JSON.parse(fs.readFileSync("./contas.json"));
+            const account = account_list.find(account => account.email === req.session.email)
+            if (account) {
+                account.getPass = true;
+                fs.writeFile("./contas.json", JSON.stringify(account_list), (error) => {
+                    if (error) throw error;
+                });
+            }
+
+            const changeData = {
+                tipoPasse: req.body.tipoPasse,
+                comprovativoMorada: req.files['comprovativoMorada'] ?
+                    Array.isArray(req.files['comprovativoMorada']) ?
+                        req.files['comprovativoMorada'].map(file => '/uploads/' + file.filename) :
+                        '/uploads/' + req.files['comprovativoMorada'][0].filename :
+                    null,
+                emitted: false,
+                emailAssociado: req.session.email
+            };
+
+            req.session.changeData = req.session.changeData || [];
+            req.session.changeData.push(changeData);
             res.redirect('/');
         } catch (error) {
             next(error);

@@ -53,6 +53,7 @@ router.post("/", function (req, res, next) {
     if (req.session.isAdmin) {
       // Acesso aos dados dos students na sessão
       console.log(req.session.studentFormData);
+      console.log(req.session.changeData);
     }
     res.redirect("/");
   }

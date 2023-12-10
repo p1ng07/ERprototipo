@@ -8,10 +8,10 @@
           <%- include('navbar.ejs'); %>
         </header>
 
-        <div class="mt-3">
+        <div class="mt-3 p-3 rounded border bg-light">
           <% if(hasPass == false) { %>
             <% if(getPass == false) { %>
-              <a href="/getPass" class="btn btn-outline-dark btn-lg btn-block mt-3" role="button">Pedir passe</a>
+              <a href="/getPass" class="btn btn-outline-dark mt-3" role="button">Pedir passe</a>
             <% } else { %>
               <% if(emittedPass == false) { %>
                 <h3 class="text-center mt-3">A emisão do passe ainda está em análise</h3>
@@ -19,7 +19,8 @@
             <% } %>
           <% } else { %>
             <a href="#" class="btn btn-outline-dark btn-lg btn-block mt-3" role="button">Pagar próximo mês</a>
-            <a href="#" class="btn btn-outline-dark btn-lg btn-block mt-3" role="button">Mudar tipo de passe</a>
+            <label class="mt-3">Tipo de passe: <%= typePass %></label></br>
+            <a href="/getPass/tipo" class="btn btn-outline-dark mt-1" role="button">Mudar tipo de passe</a>
             <a href="#" class="btn btn-outline-dark btn-lg btn-block mt-3" role="button">Obter comprovativo</a>
           <% } %>
         </div>

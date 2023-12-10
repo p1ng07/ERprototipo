@@ -6,15 +6,17 @@
         "isAdmin": true,
         "hasPass": false,
         "getPass": false,
-        "emittedPass": false
+        "emittedPass": false,
+        "typePass": ""
     },
     {
         "email": "student@uma.pt",
         "pass": "student",
-        "numero": "",
+        "numero": "9999999",
         "isAdmin": false,
         "hasPass": false,
         "getPass": false,
-        "emittedPass": false
+        "emittedPass": false,
+        "typePass": ""
     }
 ]
