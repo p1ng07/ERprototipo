@@ -38,7 +38,7 @@ router.post("/", function (req, res, next) {
   });
 
   // TODO Acrescentar validação de erros
-  res.redirect(301, "/login");
+  res.redirect("/login");
 });
 
 module.exports = router;
