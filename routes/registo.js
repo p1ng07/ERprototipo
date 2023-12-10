@@ -79,7 +79,8 @@ router.post("/", function (req, res, next) {
       hasPass: false,
       getPass: false,
       emittedPass: false,
-      typePass: ""
+      typePass: "",
+      payed: false
     };
 
     account_list.push(new_account);

@@ -21,6 +21,7 @@ var passRouter = require("./routes/pass");
 var getPassRouter = require("./routes/getPass");
 var emitPassRouter = require("./routes/emitPass");
 var horariosRouter = require("./routes/horarios");
+var paymentRouter = require("./routes/payment");
 
 var app = express();
 // view engine setup
@@ -50,6 +51,7 @@ app.use("/getPass", getPassRouter);
 app.use("/emitPass", emitPassRouter);
 app.use("/registo", registoRouter);
 app.use("/horarios", horariosRouter);
+app.use("/payment", paymentRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

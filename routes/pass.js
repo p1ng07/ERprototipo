@@ -8,6 +8,7 @@ router.get("/", function (req, res, next) {
     let getPass = false;
     let emittedPass = false;
     let typePass = "";
+    let payed = false;
     const account_list = JSON.parse(fs.readFileSync("./contas.json"));
     account_list.every((account) => {
         if (account.email == req.session.email) {
@@ -23,7 +24,10 @@ router.get("/", function (req, res, next) {
             if (account.typePass !== "") {
                 typePass = account.typePass;
             }
-            res.render("pass", { title: "Passe", hasPass, getPass, emittedPass, typePass, changeType: false })
+            if (account.payed == true) {
+                payed = true;
+            }
+            res.render("pass", { title: "Passe", hasPass, getPass, emittedPass, typePass, payed, changeType: false })
             return false;
         }
         return true;

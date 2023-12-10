@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<%- include('head.ejs', {title: 'Página principal' }); %>
+
+    <body>
+        <div class="container">
+
+            <%- include('navbar.ejs', {isAdmin: isAdmin}); %>
+                <% if(payed == false) { %>
+                    <div class="row h-100 justify-content-center align-items-center mt-5">
+                        <div class="col-md-6">
+                            <div class="card rounded p-4 justify-content-center align-items-center">
+                                <h3 class="mb-4">Dados de Pagamento</h3>
+                                <p>Entidade: 12345</p>
+                                <p>Referência: 987 654 321</p>
+                                <p>Valor: 10,00€</p>
+                                <form action="/payment" method="post">
+                                    <button type="submit" class="btn btn-outline-dark">Pagar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <div class="row h-100 justify-content-center align-items-center mt-5">
+                        <div class="col-md-6">
+                            <div class="card rounded p-4 justify-content-center align-items-center">
+                                <h3 class="mb-4">Comprovativo de Pagamento</h3>
+                                <p>Foi feito um pagamento com os seguintes dados:</p>
+                                <p>Entidade: 12345</p>
+                                <p>Referência: 987 654 321</p>
+                                <p>Valor: 10,00€</p>
+                                <p class="mt-2">Da conta: <%= email %></p>
+                                <form action="/payment/check" method="post">
+                                    <button type="submit" class="btn btn-outline-dark">Voltar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+    </body>
+
+</html>
