@@ -59,9 +59,11 @@
                             <% if (formData.emitted  == false) { %>
                                 <td>
                                     <form method="post" action="/emitPass/emitir/<%= index %>">
+                                        <input type="hidden" name="emailAssociado" value="<%= formData.emailAssociado %>"/>
                                         <button type="submit" class="btn btn-primary btn-block">Emitir</button>
                                     </form>
                                     <form method="post" action="/emitPass/apagar/<%= index %>">
+                                        <input type="hidden" name="emailAssociado" value="<%= formData.emailAssociado %>"/>
                                         <button type="submit" class="btn btn-danger mt-1 btn-block">Apagar</button>
                                     </form>
                                 </td>

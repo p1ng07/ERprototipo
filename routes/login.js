@@ -30,6 +30,7 @@ router.post("/", function (req, res, next) {
       if (account.pass == req.body.form__password) {
         // Conta existe, fazer login
         req.session.isAdmin = account.isAdmin;
+        req.session.email = account.email;
         req.session.save();
 
         console.log("Pass aceite");
@@ -48,7 +49,7 @@ router.post("/", function (req, res, next) {
     // Guardar na sessão se o utilizador corrente é admin ou não
 
     // Renderizar a página principal
-    console.log("Sessao:" + req.session);
+    console.log("Sessao:" + req.session);   
     if (req.session.isAdmin) {
       // Acesso aos dados dos students na sessão
       console.log(req.session.studentFormData);

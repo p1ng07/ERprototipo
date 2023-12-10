@@ -76,6 +76,9 @@ router.post("/", function (req, res, next) {
       pass: req.body.form__pass,
       numero: req.body.form__number,
       isAdmin: false,
+      hasPass: false,
+      getPass: false,
+      emittedPass: false
     };
 
     account_list.push(new_account);

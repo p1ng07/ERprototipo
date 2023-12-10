@@ -1,1 +1,20 @@
-[{"email":"admin@uma.pt","pass":"admin","numero":"0000000","isAdmin":true},{"email":"student@uma.pt","pass":"student","numero":"","isAdmin":false}]
+[
+    {
+        "email": "admin@uma.pt",
+        "pass": "admin",
+        "numero": "0000000",
+        "isAdmin": true,
+        "hasPass": false,
+        "getPass": false,
+        "emittedPass": false
+    },
+    {
+        "email": "student@uma.pt",
+        "pass": "student",
+        "numero": "",
+        "isAdmin": false,
+        "hasPass": false,
+        "getPass": false,
+        "emittedPass": false
+    }
+]
