@@ -34,6 +34,11 @@
           <!-- numero de membro da UMa -->
           <div class="form-group">
             <label for="numeroMembroUMa">Número</label>
+            <% if (error_number == true) { %>
+            <label for="numeroMembroUMa" class="text-danger">
+              O número inserido não é válido
+            </label>
+            <% } %>
             <input
               type="number"
               class="form-control"
@@ -58,25 +63,18 @@
           <!-- Confirmação da password -->
           <div class="form-group">
             <label for="exampleInputPassword1">Confirmar Password</label>
+            <% if (error_confirmation_pass == true) { %>
+            <label for="exampleInputPassword1" class="text-danger">
+              As passwords inseridas não coincidem.
+            </label>
+            <% } %>
             <input
               type="password"
               class="form-control"
               id="exampleInputPassword1"
+              name="form__confirmation_pass"
               placeholder="Confirmar Password"
             />
-          </div>
-
-          <!-- Achei engraçado ter isto -->
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="check"
-            />
-            <label class="form-check-label" for="check">
-              Concordo com os termos e condições
-            </label>
           </div>
 
           <button type="submit" class="btn btn-outline-dark">

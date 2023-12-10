@@ -1,21 +1,70 @@
 var express = require("express");
 var router = express.Router();
-
 const fs = require("fs");
+const validator = require("email-validator");
+
+function isNumeric(str) {
+  if (typeof str != "string") return false; // we only process strings!
+  return !isNaN(str) && !isNaN(parseFloat(str));
+}
 
 router.get("/", function (req, res, next) {
-  res.render("registo", { error_check_email: false });
+  res.render("registo", {
+    error_check_email: false,
+    error_confirmation_pass: false,
+    error_number: false,
+  });
 });
 
 router.post("/", function (req, res, next) {
   // Verifica se ocorreu um erro na criação do email
-  let error_check_email = true;
+  let error_check_email = false;
+  let error_confirmation_pass = false;
+  let error_number = false;
 
-  if (Object.keys(req.body.form__email).length === 0) {
-    res.render("registo", { error_check_email: error_check_email });
+  console.log(req.body);
+
+  const email = req.body.form__email;
+  const password = req.body.form__pass;
+  const confirmation_pass = req.body.form__confirmation_pass;
+  const mec_number = req.body.form__number;
+
+  if (typeof email == "undefined") {
+    error_check_email = true;
+  } else {
+    if (!validator.validate(email)) {
+      error_check_email = true;
+    }
   }
 
-  // TODO Fazer verificação de dados (email pass e numero)
+  if (typeof confirmation_pass == "undefined") {
+    error_confirmation_pass = true;
+  } else {
+    if (confirmation_pass !== password) {
+      error_confirmation_pass = true;
+    }
+  }
+
+  if (typeof mec_number == "undefined") {
+    error_number = true;
+  } else {
+    if (!isNumeric(mec_number)) {
+      error_number = true;
+    } else {
+      if (mec_number.length !== 7) {
+        error_number = true;
+      }
+    }
+  }
+
+  if (error_check_email || error_confirmation_pass || error_number) {
+    res.render("registo", {
+      error_confirmation_pass: error_confirmation_pass,
+      error_number: error_number,
+      error_check_email: error_check_email,
+    });
+    return;
+  }
 
   fs.readFile("./contas.json", (error, data) => {
     if (error) throw error;
