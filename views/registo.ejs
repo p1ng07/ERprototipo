@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
   <%- include('head.ejs', {title: 'Registo'}); %>
@@ -108,3 +109,92 @@
 
   </body>
 </html>
+=======
+<!DOCTYPE html>
+<html>
+  <%- include('head.ejs', {title: 'Registo'}); %>
+
+  <body>
+    <div class="container">
+      <div class="shadow-lg p-3 mt-3 bg-white rounded">
+        <h3 class="text-center">Cria a tua conta</h3>
+        <form action="/registo" method="post">
+          <!--verifica criação do email -->
+          <div class="form-group">
+            <% if (error_check_email == true) { %>
+            <div>
+              <label for="check_email">Email</label>
+            </div>
+            <div>
+              <label for="check_email" class="text-danger">
+                O Email é de preenchimento obrigatório.
+              </label>
+            </div>
+
+            <% } else { %>
+            <label for="check_email">Email</label>
+            <% } %>
+            <input
+              type="email"
+              class="form-control"
+              id="check_email"
+              name="form__email"
+              placeholder="nome@email.com"
+            />
+          </div>
+
+          <!-- numero de membro da UMa -->
+          <div class="form-group">
+            <label for="numeroMembroUMa">Número</label>
+            <% if (error_number == true) { %>
+            <label for="numeroMembroUMa" class="text-danger">
+              O número inserido não é válido
+            </label>
+            <% } %>
+            <input
+              type="number"
+              class="form-control"
+              id="numeroMembroUMa"
+              name="form__number"
+              placeholder="ex: 2087624"
+            />
+          </div>
+
+          <!-- Criação da password -->
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              name="form__pass"
+              placeholder="Password"
+            />
+          </div>
+
+          <!-- Confirmação da password -->
+          <div class="form-group">
+            <label for="exampleInputPassword1">Confirmar Password</label>
+            <% if (error_confirmation_pass == true) { %>
+            <label for="exampleInputPassword1" class="text-danger">
+              As passwords inseridas não coincidem.
+            </label>
+            <% } %>
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              name="form__confirmation_pass"
+              placeholder="Confirmar Password"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-outline-dark">
+            Criar conta
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+>>>>>>> feature/criar-conta

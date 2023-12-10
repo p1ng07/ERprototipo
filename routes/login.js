@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var fs = require("fs");
 
 router.get("/logout", function (req, res, next) {
   req.session.isAdmin = undefined;
@@ -18,27 +19,27 @@ router.post("/", function (req, res, next) {
   // Sinaliza se houve um erro com o email
   let error_email = true;
 
-  if (req.body.form__email == "admin@uma.pt") {
-    error_email = false;
+  const account_list = JSON.parse(fs.readFileSync("./contas.json"));
 
-    if (req.body.form__password == "admin") {
-      // Variavel de sessao que controla se o utilizador corrente é admin ou não
-      req.session.isAdmin = true;
-      req.session.save();
+  // Verifica se a conta usada no login existe
+  account_list.every((account) => {
+    if (account.email == req.body.form__email) {
+      console.log("Email aceite");
+      // Sinalizar que não houve nenhum erro com o email
+      error_email = false;
+      if (account.pass == req.body.form__password) {
+        // Conta existe, fazer login
+        req.session.isAdmin = account.isAdmin;
+        req.session.save();
 
-      error_pass = false;
+        console.log("Pass aceite");
+        // Sinalizar que não houve nenhum erro com a pass
+        error_pass = false;
+        return false;
+      }
     }
-  } else if (req.body.form__email == "student@uma.pt") {
-    error_email = false;
-
-    if (req.body.form__password == "student") {
-      // Variavel de sessao que controla se o utilizador corrente é admin ou não
-      req.session.isAdmin = false;
-      req.session.save();
-
-      error_pass = false;
-    }
-  }
+    return true;
+  });
 
   if (error_pass || error_email) {
     // Mandar de volta para o login com erros
