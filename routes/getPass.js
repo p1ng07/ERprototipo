@@ -30,9 +30,12 @@ router.post("/", upload.fields([
     let nome_error = false;
     let numero_error = false;
     let cc_error = false;
+    let cc_file_error = false;
     let cartao_error = false;
+    let cartao_file_error = false;
     let tipo_error = false;
     let comprovativo_error = false;
+    let comprovativo_file_error = false;
 
     if (nomeMembroUMa.length == 0) {
         nome_error = true;
@@ -42,11 +45,38 @@ router.post("/", upload.fields([
         numero_error = true;
     }
 
-    if (!req.files['CCMembroUMa'] || req.files['CCMembroUMa'].length == 0 || req.files['CCMembroUMa'].length > 2 || req.files['CCMembroUMa'].every(file => file.mimetype !== 'image/jpeg')) {
+    if (req.files['CCMembroUMa']) {
+        req.files['CCMembroUMa'].forEach(file => {
+            const fileName = file.originalname;
+            if (fileName.toLowerCase().endsWith('jpg')) {} else {
+                cc_file_error = true;
+            }
+        });
+    }
+
+    if (req.files['cartaoMembroUMa']) {
+        req.files['cartaoMembroUMa'].forEach(file => {
+            const fileName = file.originalname;
+            if (fileName.toLowerCase().endsWith('jpg')) {} else {
+                cartao_file_error = true;
+            }
+        });
+    }
+
+    if (req.files['comprovativoMorada']) {
+        req.files['comprovativoMorada'].forEach(file => {
+            const fileName = file.originalname;
+            if (fileName.toLowerCase().endsWith('jpg')) {} else {
+                comprovativo_file_error = true;
+            }
+        });
+    }
+
+    if (!req.files['CCMembroUMa'] || req.files['CCMembroUMa'].length == 0 || req.files['CCMembroUMa'].length > 2 || cc_file_error) {
         cc_error = true;
     }
 
-    if (!req.files['cartaoMembroUMa'] || req.files['cartaoMembroUMa'].length == 0 || req.files['cartaoMembroUMa'].length > 2 || req.files['cartaoMembroUMa'].every(file => file.mimetype !== 'image/jpeg')) {
+    if (!req.files['cartaoMembroUMa'] || req.files['cartaoMembroUMa'].length == 0 || req.files['cartaoMembroUMa'].length > 2 || cartao_file_error) {
         cartao_error = true;
     }
 
@@ -54,7 +84,7 @@ router.post("/", upload.fields([
         tipo_error = true;
     }
 
-    if (tipoPasse == 'Interurbano' && (!req.files['comprovativoMorada'] || req.files['comprovativoMorada'].length == 0 || req.files['comprovativoMorada'].length > 2 || req.files['comprovativoMorada'].every(file => file.mimetype !== 'image/jpeg'))) {
+    if (tipoPasse == 'Interurbano' && (!req.files['comprovativoMorada'] || req.files['comprovativoMorada'].length == 0 || req.files['comprovativoMorada'].length > 2 || comprovativo_file_error)) {
         comprovativo_error = true;
     }
 
