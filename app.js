@@ -5,12 +5,21 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const session = require("express-session");
 const bodyParser = require("body-parser");
+const fs = require('fs');
 
 const sessionMiddleware = session({
   secret: "secret",
   resave: true,
   saveUninitialized: true,
 });
+
+const publicPath = path.join(__dirname, 'public');
+const uploadPath = path.join(publicPath, 'uploads');
+
+if (fs.existsSync(uploadPath)) {
+  fs.rmSync(uploadPath, { recursive: true });
+}
+fs.mkdirSync(uploadPath);
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");

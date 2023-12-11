@@ -22,7 +22,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/tipo", function (req, res, next) {
-    res.render("getPass", { nome_error: false, cc_error: false, cartao_error: false, tipo_error: false, comprovativo_error: false, changeType: true })
+    res.render("getPass", { nome_error: false, cc_error: false, cartao_error: false, tipo_error: false, comprovativo_error: false, mudar_tipo_error: false, changeType: true })
 })
 
 router.post("/", upload.fields([
@@ -89,7 +89,7 @@ router.post("/", upload.fields([
     }
 
     if (nome_error || cc_error || cartao_error || tipo_error || comprovativo_error) {
-        res.render("getPass", { nome_error, cc_error, cartao_error, tipo_error, comprovativo_error});
+        res.render("getPass", { nome_error, cc_error, cartao_error, tipo_error, comprovativo_error, mudar_tipo_error: false, changeType: false });
     } else {
         try {
             let numeroUMa;
@@ -138,9 +138,18 @@ router.post("/tipo", upload.fields([
     const { tipoPasse } = req.body;
 
     let tipo_error = false;
+    let mudar_tipo_error = false;
     let comprovativo_error = false;
     let comprovativo_file_error = false;
 
+    const account_list = JSON.parse(fs.readFileSync("./contas.json"));
+    const account = account_list.find(account => account.email === req.session.email)
+    if (account) {
+        if (account.typePass == tipoPasse) {
+            mudar_tipo_error = true;
+        }
+    }
+    
     if (req.files['comprovativoMorada']) {
         req.files['comprovativoMorada'].forEach(file => {
             const fileName = file.originalname;
@@ -158,8 +167,8 @@ router.post("/tipo", upload.fields([
         comprovativo_error = true;
     }
 
-    if (tipo_error || comprovativo_error) {
-        res.render("getPass/tipo", { tipo_error, comprovativo_error});
+    if (tipo_error || comprovativo_error || mudar_tipo_error) {
+        res.render("getPass", { tipo_error, comprovativo_error, mudar_tipo_error, changeType: true });
     } else {
         try {
             const account_list = JSON.parse(fs.readFileSync("./contas.json"));

@@ -20,6 +20,11 @@
                                 <label for="tipoPasse" class="text-danger">Campo obrigatório</label>
                             </div>
                         <% } %>
+                        <% if(typeof mudar_tipo_error !== 'undefined' && mudar_tipo_error == true) { %>
+                            <div>
+                                <label for="tipoPasse" class="text-danger">Não pode escolher o mesmo tipo de passe</label>
+                            </div>
+                        <% } %>
                         <% if(comprovativo_error == true) { %>
                             <select name="tipoPasse" id="tipoPasse">
                                 <option value=""></option>
@@ -37,7 +42,7 @@
 
                     <div id="arquivoInterurbano" class="<%= comprovativo_error ? 'display-block' : 'display-none' %>">
                         <div class="form-group">
-                            <label for="comprovativoMorada">Arquivo Interurbano <span style="color: red;">*</span></label>
+                            <label for="comprovativoMorada">Comprovativo de morada <span style="color: red;">*</span></label>
                             <% if(comprovativo_error == true) { %>
                                 <div>
                                     <label for="comprovativoMorada" class="text-danger">Campo obrigatório, máximo de 2 ficheiros .jpg</label>
@@ -113,7 +118,7 @@
 
                     <div id="arquivoInterurbano" class="<%= comprovativo_error ? 'display-block' : 'display-none' %>">
                         <div class="form-group">
-                            <label for="comprovativoMorada">Arquivo Interurbano <span style="color: red;">*</span></label>
+                            <label for="comprovativoMorada">Comprovativo de morada <span style="color: red;">*</span></label>
                             <% if(comprovativo_error == true) { %>
                                 <div>
                                     <label for="comprovativoMorada" class="text-danger">Campo obrigatório, máximo de 2 ficheiros .jpg</label>

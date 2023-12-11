@@ -6,6 +6,7 @@
         <div class="container">
             <%- include('navbar.ejs', { isAdmin: isAdmin }); %>
 
+            <% if(studentFormData.length > 0) { %>
             <h3 class="text-center mt-3">Pedidos de passe</h3>
             <div class="table-responsive">
                 <table class="table table-hover text-center mt-5">
@@ -84,8 +85,9 @@
                 </table>   
                 
             </div> 
+            <% } %>
 
-
+            <% if(changeData.length > 0) { %>
             <h3 class="text-center mt-3">Mudanças de tipo de passe</h3>
             <div class="table-responsive">
                 <table class="table table-hover text-center mt-5">
@@ -139,9 +141,9 @@
                             <% }) %>
                         </tbody>
                     </thead>
-                </table>   
-                
+                </table>      
             </div>
+            <% } %>
         </div>
 
         <div class="modal fade justify-content-center align-items-center" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
