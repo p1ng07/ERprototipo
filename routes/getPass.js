@@ -98,32 +98,33 @@ router.post("/", upload.fields([
             if (account) {
                 numeroUMa = account.numero;
                 account.getPass = true;
-                fs.writeFile("./contas.json", JSON.stringify(account_list), (error) => {
-                    if (error) throw error;
-                });
             }
 
-            const formData = {
-                nomeMembroUMa: req.body.nomeMembroUMa,
-                numberMembroUMa: numeroUMa,
-                CCMembroUMa: Array.isArray(req.files['CCMembroUMa']) ?
-                    req.files['CCMembroUMa'].map(file => '/uploads/' + file.filename) :
-                    '/uploads/' + req.files['CCMembroUMa'][0].filename,
-                cartaoMembroUMa: Array.isArray(req.files['cartaoMembroUMa']) ?
-                    req.files['cartaoMembroUMa'].map(file => '/uploads/' + file.filename) :
-                    '/uploads/' + req.files['cartaoMembroUMa'][0].filename,
-                tipoPasse: req.body.tipoPasse,
-                comprovativoMorada: req.files['comprovativoMorada'] ?
-                    Array.isArray(req.files['comprovativoMorada']) ?
-                        req.files['comprovativoMorada'].map(file => '/uploads/' + file.filename) :
-                        '/uploads/' + req.files['comprovativoMorada'][0].filename :
-                    null,
-                emitted: false,
-                emailAssociado: req.session.email
-            };
-
-            req.session.studentFormData = req.session.studentFormData || [];
-            req.session.studentFormData.push(formData);
+            const admin = account_list.find(account => account.isAdmin === true)
+            if (admin) {
+                admin.emitList = admin.emitList || [];
+                admin.emitList.push({
+                    nomeMembroUMa: req.body.nomeMembroUMa,
+                    numberMembroUMa: numeroUMa,
+                    CCMembroUMa: Array.isArray(req.files['CCMembroUMa']) ?
+                        req.files['CCMembroUMa'].map(file => '/uploads/' + file.filename) :
+                        '/uploads/' + req.files['CCMembroUMa'][0].filename,
+                    cartaoMembroUMa: Array.isArray(req.files['cartaoMembroUMa']) ?
+                        req.files['cartaoMembroUMa'].map(file => '/uploads/' + file.filename) :
+                        '/uploads/' + req.files['cartaoMembroUMa'][0].filename,
+                    tipoPasse: req.body.tipoPasse,
+                    comprovativoMorada: req.files['comprovativoMorada'] ?
+                        Array.isArray(req.files['comprovativoMorada']) ?
+                            req.files['comprovativoMorada'].map(file => '/uploads/' + file.filename) :
+                            '/uploads/' + req.files['comprovativoMorada'][0].filename :
+                        null,
+                    emitted: false,
+                    emailAssociado: req.session.email
+                })
+            }
+            fs.writeFile("./contas.json", JSON.stringify(account_list), (error) => {
+                if (error) throw error;
+            });
             res.redirect('/');
         } catch (error) {
             next(error);
@@ -149,7 +150,7 @@ router.post("/tipo", upload.fields([
             mudar_tipo_error = true;
         }
     }
-    
+
     if (req.files['comprovativoMorada']) {
         req.files['comprovativoMorada'].forEach(file => {
             const fileName = file.originalname;
@@ -173,26 +174,27 @@ router.post("/tipo", upload.fields([
         try {
             const account_list = JSON.parse(fs.readFileSync("./contas.json"));
             const account = account_list.find(account => account.email === req.session.email)
+            const admin = account_list.find(account => account.isAdmin === true)
+
             if (account) {
-                account.getPass = true;
-                fs.writeFile("./contas.json", JSON.stringify(account_list), (error) => {
-                    if (error) throw error;
-                });
+                account.changePass = true;
             }
-
-            const changeData = {
-                tipoPasse: req.body.tipoPasse,
-                comprovativoMorada: req.files['comprovativoMorada'] ?
-                    Array.isArray(req.files['comprovativoMorada']) ?
-                        req.files['comprovativoMorada'].map(file => '/uploads/' + file.filename) :
-                        '/uploads/' + req.files['comprovativoMorada'][0].filename :
-                    null,
-                emitted: false,
-                emailAssociado: req.session.email
-            };
-
-            req.session.changeData = req.session.changeData || [];
-            req.session.changeData.push(changeData);
+            if (admin) {
+                admin.changeList = admin.changeList || [];
+                admin.changeList.push({
+                    tipoPasse: req.body.tipoPasse,
+                    comprovativoMorada: req.files['comprovativoMorada'] ?
+                        Array.isArray(req.files['comprovativoMorada']) ?
+                            req.files['comprovativoMorada'].map(file => '/uploads/' + file.filename) :
+                            '/uploads/' + req.files['comprovativoMorada'][0].filename :
+                        null,
+                    emitted: false,
+                    emailAssociado: req.session.email
+                })
+            }
+            fs.writeFile("./contas.json", JSON.stringify(account_list), (error) => {
+                if (error) throw error;
+            });
             res.redirect('/');
         } catch (error) {
             next(error);

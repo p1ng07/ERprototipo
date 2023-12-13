@@ -15,11 +15,16 @@ const sessionMiddleware = session({
 
 const publicPath = path.join(__dirname, 'public');
 const uploadPath = path.join(publicPath, 'uploads');
+const account_list = JSON.parse(fs.readFileSync("./contas.json"));
+const admin = account_list.find(account => account.isAdmin === true);
 
-if (fs.existsSync(uploadPath)) {
-  fs.rmSync(uploadPath, { recursive: true });
+//Verifica se tem algum passe a ser emitido ou a ser mudado
+if (admin && Array.isArray(admin.emitList) && admin.emitList.length === 0 && Array.isArray(admin.changeList) && admin.changeList.length === 0) {
+  if (fs.existsSync(uploadPath)) {
+    fs.rmSync(uploadPath, { recursive: true });
+  }
+  fs.mkdirSync(uploadPath);
 }
-fs.mkdirSync(uploadPath);
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");

@@ -7,8 +7,11 @@
         "hasPass": false,
         "getPass": false,
         "emittedPass": false,
+        "changePass": false,
         "typePass": "",
-        "payed": false
+        "payed": false,
+        "emitList": [],
+        "changeList": []
     },
     {
         "email": "student@uma.pt",
@@ -18,6 +21,7 @@
         "hasPass": false,
         "getPass": false,
         "emittedPass": false,
+        "changePass": false,
         "typePass": "",
         "payed": false
     }

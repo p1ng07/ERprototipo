@@ -79,6 +79,7 @@ router.post("/", function (req, res, next) {
       hasPass: false,
       getPass: false,
       emittedPass: false,
+      changePass: false,
       typePass: "",
       payed: false
     };

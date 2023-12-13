@@ -7,8 +7,11 @@
             <%- include('navbar.ejs', { isAdmin: isAdmin }); %>
 
             <div class="row">
+                <% if(studentFormData.length == 0 && changeData.length == 0) { %>
+                    <h3 class="text-center mt-3">Sem pedidos ou mudanças de passe</h3>
+                <% } %>
                 <% if(studentFormData.length > 0) { %>
-                    <% if (changeData.length > 0 && changeData.length > 0) { %>
+                    <% if (studentFormData.length > 0 && changeData.length > 0) { %>
                         <div class="col-md-6">
                     <% } %>
                     <h3 class="text-center mt-3">Pedidos de passe</h3>
@@ -89,13 +92,13 @@
                         </table>   
                         
                     </div> 
-                    <% if (changeData.length > 0 && changeData.length > 0) { %>
+                    <% if (studentFormData.length > 0 && changeData.length > 0) { %>
                     </div>
                     <% } %>
                 <% } %>
 
                 <% if(changeData.length > 0) { %>
-                    <% if (changeData.length > 0 && changeData.length > 0) { %>
+                    <% if (studentFormData.length > 0 && changeData.length > 0) { %>
                         <div class="col-md-6">
                     <% } %>
                     <h3 class="text-center mt-3">Mudanças de tipo de passe</h3>
@@ -153,7 +156,7 @@
                             </tbody>
                         </table>      
                     </div>
-                    <% if (changeData.length > 0 && changeData.length > 0) { %>
+                    <% if (studentFormData.length > 0 && changeData.length > 0) { %>
                         </div>
                     <% } %>
                 <% } %>

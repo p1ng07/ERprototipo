@@ -23,7 +23,11 @@
               <a href="/payment" class="btn btn-outline-dark btn-lg btn-block mt-1" role="button">Pagar próximo mês</a>
             <% } %>
             <label class="mt-3">Tipo de passe: <%= typePass %></label></br>
-            <a href="/getPass/tipo" class="btn btn-outline-dark btn-lg btn-block mt-1">Mudar tipo de passe</a>
+            <% if(changePass == true) { %>
+              <label class="mt-2">Pedido de mudança de passe efetuado!</label>
+            <% } else { %>
+              <a href="/getPass/tipo" class="btn btn-outline-dark btn-lg btn-block mt-1">Mudar tipo de passe</a>
+            <% } %>
             <% if(payed == true) { %>
               <label class="mt-3">Comprovativo</label></br>
               <a href="/payment/check" class="btn btn-outline-dark btn-lg btn-block mt-1" role="button">Obter comprovativo</a>
