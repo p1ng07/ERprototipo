@@ -41,6 +41,7 @@ var passRouter = require("./routes/pass");
 var getPassRouter = require("./routes/getPass");
 var emitPassRouter = require("./routes/emitPass");
 var paymentRouter = require("./routes/payment");
+var paragensRouter = require("./routes/paragens");
 
 var app = express();
 // view engine setup
@@ -70,6 +71,7 @@ app.use("/getPass", getPassRouter);
 app.use("/emitPass", emitPassRouter);
 app.use("/registo", registoRouter);
 app.use("/payment", paymentRouter);
+app.use("/paragens", paragensRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
