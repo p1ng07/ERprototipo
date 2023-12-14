@@ -5,7 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const session = require("express-session");
 const bodyParser = require("body-parser");
-const fs = require('fs');
+const fs = require("fs");
 
 const sessionMiddleware = session({
   secret: "secret",
@@ -13,13 +13,19 @@ const sessionMiddleware = session({
   saveUninitialized: true,
 });
 
-const publicPath = path.join(__dirname, 'public');
-const uploadPath = path.join(publicPath, 'uploads');
+const publicPath = path.join(__dirname, "public");
+const uploadPath = path.join(publicPath, "uploads");
 const account_list = JSON.parse(fs.readFileSync("./contas.json"));
-const admin = account_list.find(account => account.isAdmin === true);
+const admin = account_list.find((account) => account.isAdmin === true);
 
 //Verifica se tem algum passe a ser emitido ou a ser mudado
-if (admin && Array.isArray(admin.emitList) && admin.emitList.length === 0 && Array.isArray(admin.changeList) && admin.changeList.length === 0) {
+if (
+  admin &&
+  Array.isArray(admin.emitList) &&
+  admin.emitList.length === 0 &&
+  Array.isArray(admin.changeList) &&
+  admin.changeList.length === 0
+) {
   if (fs.existsSync(uploadPath)) {
     fs.rmSync(uploadPath, { recursive: true });
   }
@@ -34,7 +40,6 @@ var contactarRouter = require("./routes/contactar");
 var passRouter = require("./routes/pass");
 var getPassRouter = require("./routes/getPass");
 var emitPassRouter = require("./routes/emitPass");
-var horariosRouter = require("./routes/horarios");
 var paymentRouter = require("./routes/payment");
 
 var app = express();
@@ -64,7 +69,6 @@ app.use("/pass", passRouter);
 app.use("/getPass", getPassRouter);
 app.use("/emitPass", emitPassRouter);
 app.use("/registo", registoRouter);
-app.use("/horarios", horariosRouter);
 app.use("/payment", paymentRouter);
 
 // catch 404 and forward to error handler

@@ -1,71 +1,76 @@
 <!DOCTYPE html>
 <html>
 
-  <%- include('head.ejs', {title: 'Login'}); %>
+    <%- include('head.ejs', {title: 'Login'}); %>
 
-  <body>
-    <div class="container">
-      <div class="shadow-lg p-3 mt-3 bg-white rounded">
-        <h3 class="text-center">Iniciar sessão</h3>
-        <form method="post">
-          <!-- email -->
-          <div class="form-group">
-            <% if (error_email == true) { %>
-            <!-- Errors for username -->
-            <div>
-              <label for="form__email">Email</label>
-            </div>
-            <div>
-              <label for="form__email" class="text-danger">
-                O e-mail inserido não existe no sistema.
-              </label>
-            </div>
-            <% } else { %>
-            <label for="form__email">Email</label>
-            <% } %>
-            <input
-              type="email"
-              class="form-control"
-              id="form__email"
-              name="form__email"
-              placeholder="nome@email.com"
-            />
-          </div>
+    <body>
+	<div class="container">
+            <div class="row vh-100 align-items-center">
+                <div class="col-sm-10-col-lg-4 col-md-6 mx-auto">
+		    <div class="shadow-lg p-2 text-center bg-white rounded-5">
+			<img class="mb-4 pt-2" src="../images/user-icon.png" />
+			<form class="form-group text-center" method="post">
+			    <!-- email -->
+			    <div class="form-group">
+				<% if (error_email == true) { %>
+				    <!-- Errors for username -->
+				    <div class="form-row">
+					<label for="form__email" class="text-danger">
+					    O e-mail inserido não existe no sistema.
+					</label>
+				    </div>
+				<% } %>
+				<div class="form-row">
+				    <input
+					type="email"
+					class="rounded-1 p-1 m-2 border-secondary form-text w-75"
+					id="form__email"
+					name="form__email"
+					placeholder="nome@email.com"
+				    />
+				</div>
+			    </div>
 
-          <!-- Criação da password -->
-          <div class="form-group">
-            <% if (error_pass == true) { %>
-            <!-- Error for password -->
-            <div>
-              <label for="form__password">Password</label>
-            </div>
-            <div>
-              <label for="form__password" class="text-danger">
-                A password inserida não pertence ao e-mail inserido.
-              </label>
-            </div>
-            <% } else { %>
-            <label for="form__password">Password</label>
-            <% } %>
-            <input
-              type="password"
-              class="form-control"
-              id="form__password"
-              name="form__password"
-              placeholder="Password"
-            />
-          </div>
+			    <!-- Criação da password -->
+			    <div class="form-group">
+				<% if (error_pass == true) { %>
+				    <!-- Error for password -->
+				    <div class="form-row">
+					<label for="form__password" class="text-danger">
+					    A password inserida não pertence ao e-mail inserido.
+					</label>
+				    </div>
+				<% } %>
+				<input
+				    type="password"
+					  class="rounded-1 p-1 m-2 border-secondary form-text w-75"
+					  id="form__password"
+					  name="form__password"
+					  placeholder="Password"
+				/>
+			    </div>
 
-          <!-- Achei engraçado ter isto -->
-          <div class="form-check">
-            <a href="registo">Criar conta</a>
-          </div>
-
-          <button type="submit" class="btn btn-outline-dark">
-            Iniciar sessão
-          </button>
-        </form>
-      </div>
-    </div>
-  </body>
+			    <div class="form-row">
+				<button
+				    class="w-75 fw-bold btn form-submit m-2 border-0 text-white text-start bg-primary"
+				>
+				    Iniciar sessão
+				</button>
+			    </div>
+			</form>
+			<hr class="mx-auto w-75 mt-2" />
+			<div class="row mt-5">
+			    <p class="fw-bold">
+				Não tem conta?
+				<a class="text-primary fw-bold" href="/login/create-account"
+				>Clica aqui</a
+					   >
+			    </p>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	</div>
+        </div>
+    </body>
 </html>
