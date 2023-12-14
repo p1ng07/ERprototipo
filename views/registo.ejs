@@ -9,13 +9,13 @@
         <form action="/registo" method="post">
           <!--verifica criação do email -->
           <div class="form-group">
-            <% if (error_check_email == true) { %>
+            <% if (error_check_email !== "") { %>
             <div>
               <label for="check_email">Email</label>
             </div>
             <div>
               <label for="check_email" class="text-danger">
-                O Email é de preenchimento obrigatório.
+		  <%- error_check_email -%>
               </label>
             </div>
 

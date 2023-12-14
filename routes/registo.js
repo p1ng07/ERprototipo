@@ -10,7 +10,7 @@ function isNumeric(str) {
 
 router.get("/", function (req, res, next) {
   res.render("registo", {
-    error_check_email: false,
+    error_check_email: "",
     error_confirmation_pass: false,
     error_number: false,
   });
@@ -18,7 +18,7 @@ router.get("/", function (req, res, next) {
 
 router.post("/", function (req, res, next) {
   // Verifica se ocorreu um erro na criação do email
-  let error_check_email = false;
+  let error_check_email = "";
   let error_confirmation_pass = false;
   let error_number = false;
 
@@ -30,10 +30,17 @@ router.post("/", function (req, res, next) {
   const mec_number = req.body.form__number;
 
   if (typeof email == "undefined") {
-    error_check_email = true;
+    error_check_email = "O e-mail é de preenchimento obrigatório.";
   } else {
     if (!validator.validate(email)) {
-      error_check_email = true;
+      error_check_email = "O e-mail inserido não é válido.";
+    } else {
+      const account_list = JSON.parse(fs.readFileSync("./contas.json"));
+      const account = account_list.filter((account) => account.email == email);
+
+      if (account.length > 0) {
+        error_check_email = "O e-mail inserido já é utilizado numa conta.";
+      }
     }
   }
 
@@ -57,7 +64,7 @@ router.post("/", function (req, res, next) {
     }
   }
 
-  if (error_check_email || error_confirmation_pass || error_number) {
+  if (error_check_email !== "" || error_confirmation_pass || error_number) {
     res.render("registo", {
       error_confirmation_pass: error_confirmation_pass,
       error_number: error_number,
@@ -81,7 +88,7 @@ router.post("/", function (req, res, next) {
       emittedPass: false,
       changePass: false,
       typePass: "",
-      payed: false
+      payed: false,
     };
 
     account_list.push(new_account);
