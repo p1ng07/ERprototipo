@@ -6,32 +6,51 @@
 	<div class="container">
 
 	    <%- include('navbar.ejs', {isAdmin: isAdmin}); %>
-	    <div class="shadow-lg p-3 mt-3 bg-white rounded">
-		<div class="row">
-		    <!-- Lado direito do ecrã -->
-		    <div class="col-md-6 justify-content-center d-flex">
-			<div class="my-auto text-center dropdown">
-			    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Consultar Horários
-			    </a>
-			    
-			    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-				<a class="dropdown-item" href="#">18:00</a>
-				<a class="dropdown-item" href="#">19:00</a>
-				<a class="dropdown-item" href="#">20:00</a>
-			    </div>
+            <div class="row">
+		<div class="shadow-lg col p-4 m-3 bg-white rounded">
+		    
+		    <div class="row justify-content-center">
+			<div class="col-md-6 justify-content-center d-flex">
+			    <form action="/horarios/visualizar-horario" method="post" class="mt-3">
+				<div class="form-group">
+				    <label for="selectHorario">Carreiras UMa</label>
+				    <select name="horario" id="selectHorario" class="form-control">
+					<option value="">Selecionar carreira</option>
+					<option value="12">[12] Jamboto (via Hospital)</option>
+					<option value="15">[15] Álamos (via Achada)</option>
+					<option value="42">[42] Alegria</option>
+				    </select>
+				</div>
+				<button type="submit" class="btn btn-outline-dark">Ver Horário</button>
+			    </form>
 			</div>
 		    </div>
 
-		    <!-- Lado direito do ecrã -->
-		    <div class="col-md-6">
-			<div class="d-flex justify-content-end card width: 90%;">
-			    <div class="card-body">
-				<img src="/img/bus1.jpg" class="img-fluid">
-			    </div>
+		    <div class="row justify-content-center pb-4">
+			<div class="col-md-6 justify-content-center d-flex">
+			    <form action="/horarios/visualizar-horario" method="post" class="mt-3">
+				<div class="form-group">
+				    <label for="selectHorario">Carreiras</label>
+				    <select name="horario" id="selectHorario" class="form-control">
+					<option value="">Selecionar carreira</option>
+					<option value="77">[77] Santo da Serra</option>
+					<option value="110">[110] Boqueirão (via Caniço)</option>
+					<option value="129">[129] Camacha</option>
+				    </select>
+				</div>
+				<button type="submit" class="btn btn-outline-dark">Ver Horário</button>
+			    </form>
 			</div>
 		    </div>
 		</div>
-	    </div>      
+		<div class="shadow-lg col p-4 m-3 bg-white rounded">
+		    <div class="d-flex justify-content-end card width: 90%;">
+			<div class="card-body">
+			    <img src="/img/bus1.jpg" class="img-fluid">
+			</div>
+		    </div>
+		</div>
+            </div>
+	</div>      
     </body>
 </html>
