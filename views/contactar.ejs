@@ -25,7 +25,7 @@
                 <% } %>
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control mt-2"
                   name="nomeMembroUMa"
                   id="nomeMembroUMa"
                   placeholder="Nome"
@@ -33,7 +33,7 @@
               </div>
 
               <!-- email do membro da UMa -->
-              <div class="form-group">
+              <div class="form-group mt-3">
                 <label for="emailMembroUMa"
                   >Email <span style="color: red">*</span></label
                 >
@@ -44,7 +44,7 @@
                 <% } %>
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control mt-2"
                   name="emailMembroUMa"
                   id="emailMembroUMa"
                   placeholder="nome@email.com"
@@ -52,7 +52,7 @@
               </div>
 
               <!-- assunto do email a enviar -->
-              <div class="form-group">
+              <div class="form-group mt-3">
                 <label for="assuntoEmail"
                   >Assunto <span style="color: red">*</span></label
                 >
@@ -63,7 +63,7 @@
                 <% } %>
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control mt-2"
                   name="assuntoEmail"
                   id="assuntoEmail"
                   placeholder="Assunto"
@@ -71,7 +71,7 @@
               </div>
 
               <!-- mensagem a enviar -->
-              <div class="form-group">
+              <div class="form-group mt-3">
                 <label for="mensagemEmail"
                   >Mensagem <span style="color: red">*</span></label
                 >
@@ -81,14 +81,14 @@
                   </div>
                 <% } %>
                 <textarea
-                  class="form-control"
+                  class="form-control mt-2"
                   name="mensagemEmail"
                   id="mensagemEmail"
                   rows="4"
                 ></textarea>
               </div>
 
-              <button type="submit" class="btn btn-outline-dark">Enviar</button>
+              <button type="submit" class="btn btn-outline-dark mt-3">Enviar</button>
 
               <% if (sended == true) { %>
               <p class="text-center mt-3">Email enviado com sucesso!!</p>
