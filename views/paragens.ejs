@@ -1,127 +1,229 @@
 <!DOCTYPE html>
 <html>
-<%- include('head.ejs', {title: 'Paragens' }); %>
+    <%- include('head.ejs', {title: 'Paragens' }); %>
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-
     <body>
-        
-        <div id="modal" class="modal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Notificação</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
+	<div id="modal" class="modal" tabindex="-1">
+	    <div class="modal-dialog">
+		<div class="modal-content">
+		    <div class="modal-header">
+			<h5 class="modal-title">Notificação</h5>
+			<button
+			    type="button"
+			    class="btn-close"
+			    data-bs-dismiss="modal"
+			    aria-label="Close"
+			></button>
+		    </div>
+		    <form action="/paragens/criar/" method="post">
+			<div class="modal-body">
+			    <div class="row">
+				<div class="col">
+				    <div class="list-group">
+					<h6>Carreiras</h6>
+					<select
+					    multiple
+					    style="overflow-y: auto"
+					    id="opcoes"
+					    name="opcao_escolhida"
+					>
+					    <option
+						class="list-group-item list-group-item-action"
+						value="110"
+					    >
+						110 - Boqueirão
+					    </option>
+					    <option
+						class="list-group-item list-group-item-action"
+						value="111"
+					    >
+						111 - Achadinha
+					    </option>
+					    <option
+						class="list-group-item list-group-item-action"
+						value="114"
+					    >
+						114 - Nogueira
+					    </option>
+					    <option
+						class="list-group-item list-group-item-action"
+						value="129"
+					    >
+						129 - Camacha
+					    </option>
+					</select>
+				    </div>
+				</div>
 
-                    <div class="col">
-                        <div class="list-group">
-                            <h6>Carreiras</h6>
+				<div class="col justify-content-start m-4 ml-n4">
+				    <select
+					class="form-select"
+					id="tempo_antecipar"
+					name="tempo_antecipar"
+				    >
+					<option
+					    class="list-group-item list-group-item-action"
+					    selected
+					    value="2"
+					>
+					    2 minutos
+					</option>
+					<option
+					    class="list-group-item list-group-item-action"
+					    value="5"
+					>
+					    5 minutos
+					</option>
+					<option
+					    class="list-group-item list-group-item-action"
+					    value="10"
+					>
+					    10 minutos
+					</option>
+					<option
+					    class="list-group-item list-group-item-action"
+					    value="15"
+					>
+					    15 minutos
+					</option>
+				    </select>
+				</div>
+			    </div>
+			</div>
+			<div class="modal-footer">
+			    <button
+				type="button"
+				class="btn btn-secondary"
+				data-bs-dismiss="modal"
+			    >
+				Cancelar
+			    </button>
+			    <button type="submit" class="btn btn-primary">
+				Criar notificação
+			    </button>
+			</div>
+		    </form>
+		</div>
+	    </div>
+	</div>
 
-
-                            <form action="">
-                                <select multiple style="overflow-y: auto;" id="opcoes" name="opcao_escolhida">
-                                    <option class="list-group-item list-group-item-action">110 - Boqueirão</a>
-                                    <option class="list-group-item list-group-item-action">111 - Achadinha</a>
-                                    <option class="list-group-item list-group-item-action">114 - Nogueira</a>
-                                    <option class="list-group-item list-group-item-action">129 - Camacha</a>
-                                </select>
-                            </div>
-                        </div>
-                    
-                        <div class="col-7 justify-content-start m-4 ml-n4 d-flex">
-                            <div class="dropend">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Tempo
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">2 min</a></li>
-                                <li><a class="dropdown-item" href="#">5 min</a></li>
-                                <li><a class="dropdown-item" href="#">10 min</a></li>
-                                <li><a class="dropdown-item" href="#">15 min</a></li>
-                                <li><a class="dropdown-item" href="#">20 min</a></li>
-                                </ul>
-                            </div>
+	<div class="container">
+	    <header><%- include('navbar.ejs'); %></header>
+	    <div class="row">
+		<div
+		    class="shadow-lg col justify-content-center d-flex p-4 m-3 bg-white rounded"
+		>
+		    <div
+			style="min-height: 400px; min-width: 200px; width: 100%"
+			id="map"
+		    ></div>
+		    <script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB76nHJ1FZaosOSYumt8kyKdETtNkIE3ac&callback=initMap&libraries=marker&v=beta"
+			defer
+		    ></script>
+		</div>
+		<div class="shadow-lg col justify-content-center p-4 m-3 bg-white rounded" >
+                    <div class="row text-center">
+                        <h2>Notificações</h2>
                     </div>
-                </div>
-                 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Criar notificação</button>
-                </div>
-                </form>
-                </div>
-            </div>
-        </div>
-        
-        <div class="container">
+		    <div class="row">
+			<div class="width-100">
+			    <table class="table table-hover table-bordered text-center mt-5">
+				<thead>
+				    <tr>
+					<th scope="col">Carreira</th>
+					<th scope="col">Hora de notificação</th>
+					<th scope="col">Ações</th>
+				    </tr>
+				</thead>
+				<tbody>
+				    <% if(notifications.length == 0) { %>
+					<tr>
+					    <td></td>
+					    <td></td>
+					    <td></td>
+					</tr>
+				    <% } else {%>
+					<% notifications.forEach((notification, index) => { %>
+					    <tr>
+						<td><%- notification.carreira %></td>
+						<% if (new Date().getMinutes() - notification.tempo_antecipar < 0) { %>
+						    <td><%- (new Date().getHours() ) + ':' + (20 + new Date().getMinutes() - notification.tempo_antecipar); %></td>
+						<% } else { %>
+						    <td><%- (new Date().getHours() ) + ':' + (7 + new Date().getMinutes() - notification.tempo_antecipar); %></td>
+						<% } %>
+						<td><button class="btn btn-danger" id='<%- index %>_cancelar'>
+						    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="12" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+						</button> </td>
+					    </tr>
+					    <script>
+					     const button_i = document.getElementById(<%- index %> + '_cancelar');
+					     const index = <%-index%>;
+					     button_i.addEventListener("click", () => {
+						 fetch("/paragens/cancelar/" + index, {
+						     method: 'GET',
+						     headers: {
+							 "content-type": "application/js"
+						     }
+						 }).then(() => location.reload());
+					     })
+					    </script>
+					<% }) %>
+				    <% } %>
+				</tbody>
+			    </table>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	</div>
 
+	<script>
+	 function initMap() {
+             const map = new google.maps.Map(document.getElementById("map"), {
+		 zoom: 16,
+		 center: { lat: 32.658889, lng: -16.924444 },
+		 mapId: "4504f8b37365c3d0",
+             });
+             // Set LatLng and title text for the markers. The first marker (Boynton Pass)
+             // receives the initial focus when tab is pressed. Use arrow keys to
+             // move between markers; press tab again to cycle through the map controls.
+             const tourStops = [
+		 {
+		     position: { lat: 32.65967984368949, lng: -16.92396737582455 },
+		     title: "Boynton Pass",
+		 },
+		 {
+		     position: { lat: 32.659444998181456, lng: -16.926907076785685 },
+		     title: "Airport Mesa",
+		 },
+             ];
+             // Create an info window to share between markers.
+             const infoWindow = new google.maps.InfoWindow();
 
-            <header><%- include('navbar.ejs'); %></header>
-            <div class="row">
-                <div class="shadow-lg col justify-content-center d-flex p-4 m-3 bg-white rounded">
-                    <div style="min-height: 400px; min-width: 200px; width: 100%;" id="map"></div>
-                    <script
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB76nHJ1FZaosOSYumt8kyKdETtNkIE3ac&callback=initMap&libraries=marker&v=beta"
-                        defer></script>
-                </div>
-                <div class="shadow-lg col justify-content-center d-flex p-4 m-3 bg-white rounded">
-                    
-                </div>
-            </div>
+             // Create the markers.
+             tourStops.forEach(({ position, title }, i) => {
+		 const pinView = new google.maps.marker.PinView({
+		     glyph: `${i + 1}`,
+		 });
+		 const marker = new google.maps.marker.AdvancedMarkerView({
+		     position,
+		     map,
+		     title: `${i + 1}. ${title}`,
+		     content: pinView.element,
+		 });
 
-        </div>
+		 // Add a click listener for each marker, and set up the info window.
+		 marker.addEventListener("gmp-click", ({ domEvent, latLng }) => {
+		     const modal = document.getElementById("modal");
+		     $("#modal").modal("toggle");
+		 });
+             });
+	 }
 
-        <script>
-            function initMap() {
-                const map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 16,
-                    center: { lat: 32.658889, lng: -16.924444 },
-                    mapId: "4504f8b37365c3d0",
-                });
-                // Set LatLng and title text for the markers. The first marker (Boynton Pass)
-                // receives the initial focus when tab is pressed. Use arrow keys to
-                // move between markers; press tab again to cycle through the map controls.
-                const tourStops = [
-                    {
-                        position: { lat: 32.65967984368949, lng: -16.92396737582455 },
-                        title: "Boynton Pass",
-                    },
-                    {
-                        position: { lat: 32.659444998181456, lng: -16.926907076785685 },
-                        title: "Airport Mesa",
-                    },
-                ];
-                // Create an info window to share between markers.
-                const infoWindow = new google.maps.InfoWindow();
-
-                // Create the markers.
-                tourStops.forEach(({ position, title }, i) => {
-                    const pinView = new google.maps.marker.PinView({
-                        glyph: `${i + 1}`,
-                    });
-                    const marker = new google.maps.marker.AdvancedMarkerView({
-                        position,
-                        map,
-                        title: `${i + 1}. ${title}`,
-                        content: pinView.element,
-                    });
-
-                    // Add a click listener for each marker, and set up the info window.
-                    marker.addEventListener("gmp-click", ({ domEvent, latLng }) => {
-                        const modal = document.getElementById("modal");
-                        $("#modal").modal('toggle');
-                        
-                    });
-                });
-            }
-
-            window.initMap = initMap;
-        </script>
+	 window.initMap = initMap;
+	</script>
     </body>
-
 </html>
