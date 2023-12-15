@@ -16,7 +16,7 @@
                     <% } %>
                     <h3 class="text-center mt-3">Pedidos de passe</h3>
                     <div class="table-responsive">
-                        <table class="table table-hover table-bordered text-center mt-5">
+                        <table class="table table-hover table-bordered border-dark text-center mt-5">
                             <thead>
                                 <tr>
                                 <th scope="col">Nome</th>
@@ -37,19 +37,19 @@
                                 <td>
                                     <% if (Array.isArray(formData.CCMembroUMa)) { %>
                                     <% formData.CCMembroUMa.forEach(function (filename, index) { %>
-                                        <img src="<%= filename %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-toggle="modal" data-target="#imageModal">
+                                        <img src="<%= filename %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-bs-toggle="modal" data-bs-target="#imageModal">
                                     <% }); %>
                                     <% } else { %>
-                                    <img src="<%= formData.CCMembroUMa %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= formData.CCMembroUMa %>')" data-toggle="modal" data-target="#imageModal">
+                                    <img src="<%= formData.CCMembroUMa %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= formData.CCMembroUMa %>')" data-bs-toggle="modal" data-bs-target="#imageModal">
                                     <% } %>
                                 </td>
                                 <td>
                                     <% if (Array.isArray(formData.cartaoMembroUMa)) { %>
                                         <% formData.cartaoMembroUMa.forEach(function (filename, index) { %>
-                                            <img src="<%= filename %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-toggle="modal" data-target="#imageModal">
+                                            <img src="<%= filename %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-bs-toggle="modal" data-bs-target="#imageModal">
                                         <% }); %>
                                     <% } else { %>
-                                        <img src="<%= formData.cartaoMembroUMa %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-toggle="modal" data-target="#imageModal">
+                                        <img src="<%= formData.cartaoMembroUMa %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-bs-toggle="modal" data-bs-target="#imageModal">
                                     <% } %>
                                 </td>
                                 <td><%= formData.tipoPasse %></td>
@@ -57,10 +57,10 @@
                                     <td>
                                         <% if (Array.isArray(formData.comprovativoMorada)) { %>
                                             <% formData.comprovativoMorada.forEach(function (filename, index) { %>
-                                                <img src="<%= filename %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-toggle="modal" data-target="#imageModal">
+                                                <img src="<%= filename %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-bs-toggle="modal" data-bs-target="#imageModal">
                                             <% }); %>
                                         <% } else { %>
-                                            <img src="<%= formData.comprovativoMorada %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-toggle="modal" data-target="#imageModal">
+                                            <img src="<%= formData.comprovativoMorada %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-bs-toggle="modal" data-bs-target="#imageModal">
                                         <% } %>
                                     </td>
                                 <% } else { %>
@@ -71,17 +71,23 @@
                                         <form method="post" action="/emitPass/emitir/<%= index %>">
                                             <input type="hidden" name="emailAssociado" value="<%= formData.emailAssociado %>"/>
                                             <input type="hidden" name="tipoPasse" value="<%= formData.tipoPasse %>"/>
-                                            <button type="submit" class="btn btn-primary btn-block">Emitir</button>
+                                            <div class="d-grid gap-2 col-6 mx-auto">
+                                                <button type="submit" class="btn btn-primary">Emitir</button>
+                                            </div>
                                         </form>
                                         <form method="post" action="/emitPass/apagar/<%= index %>">
                                             <input type="hidden" name="emailAssociado" value="<%= formData.emailAssociado %>"/>
-                                            <button type="submit" class="btn btn-danger mt-1 btn-block">Apagar</button>
+                                            <div class="d-grid gap-2 col-6 mx-auto">
+                                                <button type="submit" class="btn btn-danger mt-1">Apagar</button>
+                                            </div>
                                         </form>
                                     </td>
                                 <% } else { %>
                                     <td>Emitido 
                                         <form method="post" action="/emitPass/apagar/<%= index %>">
-                                            <button type="submit" class="btn btn-danger mt-1 btn-block">Apagar</button>
+                                            <div class="d-grid gap-2 col-6 mx-auto">
+                                                <button type="submit" class="btn btn-danger mt-1 btn-block">Apagar</button>
+                                            </div>
                                         </form>
                                     </td>
                                 <% } %>
@@ -103,7 +109,7 @@
                     <% } %>
                     <h3 class="text-center mt-3">Mudanças de tipo de passe</h3>
                     <div class="table-responsive">
-                        <table class="table table-hover table-bordered text-center mt-5">
+                        <table class="table table-hover table-bordered border-dark text-center mt-5">
                             <thead>
                                 <tr>
                                 <th scope="col">Email</th>
@@ -122,10 +128,10 @@
                                     <td>
                                         <% if (Array.isArray(data.comprovativoMorada)) { %>
                                             <% data.comprovativoMorada.forEach(function (filename, index) { %>
-                                                <img src="<%= filename %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-toggle="modal" data-target="#imageModal">
+                                                <img src="<%= filename %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-bs-toggle="modal" data-bs-target="#imageModal">
                                             <% }); %>
                                         <% } else { %>
-                                            <img src="<%= data.comprovativoMorada %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-toggle="modal" data-target="#imageModal">
+                                            <img src="<%= data.comprovativoMorada %>" class="img-fluid" style="width: 50px; height: 50px;" onclick="displayImage('<%= filename %>')" data-bs-toggle="modal" data-bs-target="#imageModal">
                                         <% } %>
                                     </td>
                                 <% } else { %>
@@ -136,17 +142,23 @@
                                         <form method="post" action="/emitPass/emitir/muda/<%= index %>">
                                             <input type="hidden" name="emailAssociado" value="<%= data.emailAssociado %>"/>
                                             <input type="hidden" name="tipoPasse" value="<%= data.tipoPasse %>"/>
-                                            <button type="submit" class="btn btn-primary btn-block">Emitir</button>
+                                            <div class="d-grid gap-2 col-6 mx-auto">
+                                                <button type="submit" class="btn btn-primary btn-block">Emitir</button>
+                                            </div>
                                         </form>
                                         <form method="post" action="/emitPass/apagar/muda/<%= index %>">
                                             <input type="hidden" name="emailAssociado" value="<%= data.emailAssociado %>"/>
-                                            <button type="submit" class="btn btn-danger mt-1 btn-block">Apagar</button>
+                                            <div class="d-grid gap-2 col-6 mx-auto">
+                                                <button type="submit" class="btn btn-danger mt-1 btn-block">Apagar</button>
+                                            </div>
                                         </form>
                                     </td>
                                 <% } else { %>
                                     <td>Emitido 
                                         <form method="post" action="/emitPass/apagar/muda/<%= index %>">
-                                            <button type="submit" class="btn btn-danger mt-1 btn-block">Apagar</button>
+                                            <div class="d-grid gap-2 col-6 mx-auto">
+                                                <button type="submit" class="btn btn-danger mt-1 btn-block">Apagar</button>
+                                            </div>
                                         </form>
                                     </td>
                                 <% } %>
