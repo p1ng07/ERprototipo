@@ -6,7 +6,7 @@
         <div class="container">
             <%- include('navbar.ejs', { isAdmin: isAdmin }); %>
 
-            <div class="row">
+            <div class="row shadow-lg p-4 m-3 bg-white rounded">
                 <% if(studentFormData.length == 0 && changeData.length == 0) { %>
                     <h3 class="text-center mt-3">Sem pedidos ou mudanças de passe</h3>
                 <% } %>
