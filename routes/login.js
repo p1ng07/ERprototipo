@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var fs = require("fs");
+var url = require("url");
 
 router.get("/logout", function (req, res, next) {
   req.session.isAdmin = undefined;
@@ -48,9 +49,14 @@ router.post("/", function (req, res, next) {
   } else {
     // Guardar na sessão se o utilizador corrente é admin ou não
 
-    // Renderizar a página principal
-    console.log("Sessao:" + req.session);
-    res.render("home", { notify_login: true });
+    res.redirect(
+      url.format({
+        pathname: "/",
+        query: {
+          notify_login: true,
+        },
+      })
+    );
   }
 });
 

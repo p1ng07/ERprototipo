@@ -4,7 +4,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("home", { title: "Home", carreira_error: false, notify_login: false });
+  res.render("home", {
+    title: "Home",
+    carreira_error: false,
+    notify_login: req.query.notify_login == "true",
+  });
 });
 
 router.post("/visualizar-horario", function (req, res, next) {
