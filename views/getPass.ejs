@@ -22,17 +22,17 @@
                         <% } %>
                         <% if(typeof mudar_tipo_error !== 'undefined' && mudar_tipo_error == true) { %>
                             <div>
-                                <label for="tipoPasse" class="text-danger">Não pode escolher o mesmo tipo de passe</label>
+                                <label for="tipoPasse" class="text-danger mt-2">Não pode escolher o mesmo tipo de passe</label>
                             </div>
                         <% } %>
                         <% if(comprovativo_error == true) { %>
-                            <select name="tipoPasse" id="tipoPasse">
+                            <select class="mt-2" name="tipoPasse" id="tipoPasse">
                                 <option value=""></option>
                                 <option value="Urbano">Urbano</option>
                                 <option value="Interurbano" selected>Interurbano</option>
                             </select>
                         <% } else { %>
-                            <select name="tipoPasse" id="tipoPasse">
+                            <select class="mt-2" name="tipoPasse" id="tipoPasse">
                                 <option value=""></option>
                                 <option value="Urbano">Urbano</option>
                                 <option value="Interurbano">Interurbano</option>
@@ -41,7 +41,7 @@
                     </div>
 
                     <div id="arquivoInterurbano" class="<%= comprovativo_error ? 'display-block' : 'display-none' %>">
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="comprovativoMorada">Comprovativo de morada <span style="color: red;">*</span></label>
                             <% if(comprovativo_error == true) { %>
                                 <div>
@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-outline-dark">Submeter requisito</button>
+                    <button type="submit" class="btn btn-outline-dark mt-3">Submeter requisito</button>
                 </form>
             </div>
         <% } else { %>
@@ -68,11 +68,11 @@
                                 <label for="nomeMembroUMa" class="text-danger">Campo obrigatório</label>
                             </div>
                         <% } %>
-                        <input type="text" class="form-control" name="nomeMembroUMa" id="nomeMembroUMa" placeholder="Nome">
+                        <input type="text" class="form-control mt-2" name="nomeMembroUMa" id="nomeMembroUMa" placeholder="Nome">
                     </div>
 
                     <!-- Foto CC do membro da UMa -->
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="CCMembroUMa">Cartão de cidadão (frente e verso .jpg) <span
                                 style="color: red;">*</span></label>
                                 <% if(cc_error == true) { %>
@@ -80,21 +80,21 @@
                                         <label for="CCMembroUMa" class="text-danger">Campo obrigatório, máximo de 2 ficheiros .jpg</label>
                                     </div>
                                 <% } %>
-                        <input type="file" class="form-control" name="CCMembroUMa" id="CCMembroUMa" multiple>
+                        <input type="file" class="form-control mt-2" name="CCMembroUMa" id="CCMembroUMa" multiple>
                     </div>
 
                     <!-- Foto do cartão do membro da UMa -->
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="cartaoMembroUMa">Foto do cartão (.jpg)<span style="color: red;">*</span></label>
                         <% if(cartao_error == true) { %>
                             <div>
                                 <label for="cartaoMembroUMa" class="text-danger">Campo obrigatório, máximo de 2 ficheiros .jpg</label>
                             </div>
                         <% } %>
-                        <input type="file" class="form-control" name="cartaoMembroUMa" id="cartaoMembroUMa" multiple>
+                        <input type="file" class="form-control mt-2" name="cartaoMembroUMa" id="cartaoMembroUMa" multiple>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="tipoPasse">Tipo de passe <span style="color: red;">*</span></label>
                         <% if(tipo_error == true) { %>
                             <div>
@@ -102,13 +102,13 @@
                             </div>
                         <% } %>
                         <% if(comprovativo_error == true) { %>
-                            <select name="tipoPasse" id="tipoPasse">
+                            <select class="mt-2" name="tipoPasse" id="tipoPasse">
                                 <option value=""></option>
                                 <option value="Urbano">Urbano</option>
                                 <option value="Interurbano" selected>Interurbano</option>
                             </select>
                         <% } else { %>
-                            <select name="tipoPasse" id="tipoPasse">
+                            <select class="mt-2" name="tipoPasse" id="tipoPasse">
                                 <option value=""></option>
                                 <option value="Urbano">Urbano</option>
                                 <option value="Interurbano">Interurbano</option>
@@ -117,18 +117,18 @@
                     </div>
 
                     <div id="arquivoInterurbano" class="<%= comprovativo_error ? 'display-block' : 'display-none' %>">
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="comprovativoMorada">Comprovativo de morada <span style="color: red;">*</span></label>
                             <% if(comprovativo_error == true) { %>
                                 <div>
                                     <label for="comprovativoMorada" class="text-danger">Campo obrigatório, máximo de 2 ficheiros .jpg</label>
                                 </div>
                             <% } %>
-                            <input type="file" class="form-control" name="comprovativoMorada" id="comprovativoMorada" multiple>
+                            <input type="file" class="form-control mt-2" name="comprovativoMorada" id="comprovativoMorada" multiple>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-outline-dark">Submeter requisito</button>
+                    <button type="submit" class="btn btn-outline-dark mt-3">Submeter requisito</button>
                 </form>
             </div>
         <% } %>

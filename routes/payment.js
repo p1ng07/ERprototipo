@@ -5,12 +5,20 @@ var fs = require("fs");
 /* GET payment page. */
 router.get("/", function (req, res, next) {
     let email = req.session.email;
-    res.render("payment", { title: "Pagamento", payed: false, email });
+    const account_list = JSON.parse(fs.readFileSync("./contas.json"));
+    const account = account_list.find(account => account.email === email);
+    let numeroString = account.numero.toString();
+    let numeroFormatado = numeroString.slice(0,3) + ' ' + numeroString.slice(3,6) + ' ' + numeroString.slice(6)
+    res.render("payment", { title: "Pagamento", payed: false, email, numeroFormatado });
 });
 
 router.get("/check", function (req, res, next) {
     let email = req.session.email;
-    res.render("payment", { title: "Comprovativo", payed: true, email });
+    const account_list = JSON.parse(fs.readFileSync("./contas.json"));
+    const account = account_list.find(account => account.email === email);
+    let numeroString = account.numero.toString();
+    let numeroFormatado = numeroString.slice(0,3) + ' ' + numeroString.slice(3,6) + ' ' + numeroString.slice(6)
+    res.render("payment", { title: "Comprovativo", payed: true, email, numeroFormatado });
 });
 
 router.post("/", function (req, res, next) {

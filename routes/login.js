@@ -50,12 +50,7 @@ router.post("/", function (req, res, next) {
 
     // Renderizar a página principal
     console.log("Sessao:" + req.session);
-    if (req.session.isAdmin) {
-      // Acesso aos dados dos students na sessão
-      console.log(req.session.studentFormData);
-      console.log(req.session.changeData);
-    }
-    res.redirect("/");
+    res.render("home", { notify_login: true });
   }
 });
 

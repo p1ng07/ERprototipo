@@ -24,7 +24,7 @@
             <% } %>
             <input
               type="email"
-              class="form-control"
+              class="form-control mt-2"
               id="check_email"
               name="form__email"
               placeholder="nome@email.com"
@@ -32,7 +32,7 @@
           </div>
 
           <!-- numero de membro da UMa -->
-          <div class="form-group">
+          <div class="form-group mt-2">
             <label for="numeroMembroUMa">Número</label>
             <% if (error_number == true) { %>
             <label for="numeroMembroUMa" class="text-danger">
@@ -41,7 +41,7 @@
             <% } %>
             <input
               type="number"
-              class="form-control"
+              class="form-control mt-2"
               id="numeroMembroUMa"
               name="form__number"
               placeholder="ex: 2087624"
@@ -49,11 +49,11 @@
           </div>
 
           <!-- Criação da password -->
-          <div class="form-group">
+          <div class="form-group mt-2">
             <label for="exampleInputPassword1">Password</label>
             <input
               type="password"
-              class="form-control"
+              class="form-control mt-2"
               id="exampleInputPassword1"
               name="form__pass"
               placeholder="Password"
@@ -61,7 +61,7 @@
           </div>
 
           <!-- Confirmação da password -->
-          <div class="form-group">
+          <div class="form-group mt-2">
             <label for="exampleInputPassword1">Confirmar Password</label>
             <% if (error_confirmation_pass == true) { %>
             <label for="exampleInputPassword1" class="text-danger">
@@ -70,14 +70,14 @@
             <% } %>
             <input
               type="password"
-              class="form-control"
+              class="form-control mt-2"
               id="exampleInputPassword1"
               name="form__confirmation_pass"
               placeholder="Confirmar Password"
             />
           </div>
 
-          <button type="submit" class="btn btn-outline-dark">
+          <button type="submit" class="btn btn-outline-dark mt-3">
             Criar conta
           </button>
         </form>

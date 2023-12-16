@@ -6,6 +6,12 @@
 	<div class="container">
 
 	    <%- include('navbar.ejs', {isAdmin: isAdmin}); %>
+		<% if (notify_login == true) { %>
+			<div style="z-index: 999" class="alert m-4 top-10 left-0 start-50 translate-middle position-absolute alert-success alert-dismissible fade show" role="alert">
+				<strong>Login efetuado!</strong>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		<% } %>
             <div class="row my-auto">
 		<div class="shadow-lg col p-4 m-3 bg-white rounded">
 		    <div class="col-md-6 justify-content-center d-flex">
