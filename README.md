@@ -2,6 +2,8 @@ Instalação:
 
 ```bash
 $ git clone https://github.com/p1ng07/ERprototipo/
+$ cd ERprototipo
+$ npm i
 ```
 
 Correr:
