@@ -8,6 +8,6 @@ $ npm i
 
 Correr:
 
-1. ```bash node app.js ```
+1. ``` node app.js ```
 2. ligar-se a localhost:3000
 
